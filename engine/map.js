@@ -201,17 +201,19 @@ if(gpsStatus){
             const accuracy = position.coords.accuracy;
 
             if(this.playerMarker){
-                this.playerMarker.setLatLng([lat,lng]);
-                return;
-            }
+    this.playerMarker.setLatLng([lat,lng]);
+    this.map.setView([lat, lng], 14);
+    return;
+}
 
-            this.playerMarker = L.circleMarker([lat,lng],{
+this.playerMarker = L.circleMarker([lat,lng],{
     radius:8,
     color:"#0080ff",
     fillColor:"#00aaff",
     fillOpacity:1,
     weight:3
 }).addTo(this.map);
+
 this.map.setView([lat, lng], 14);
 
         },
