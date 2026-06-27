@@ -831,3 +831,18 @@ box-shadow:0 0 8px #00ffd0;
   font-size:14px;
   letter-spacing:.08em;
 }
+.gps-panel{
+    position: relative;
+    z-index: 1001;
+}
+
+#gps-start-btn{
+    position: relative;
+    z-index: 1002;
+    pointer-events: auto;
+}
+
+#leaflet-map{
+    position: relative;
+    z-index: 1;
+}
