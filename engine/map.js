@@ -187,7 +187,7 @@ if(gpsStatus) gpsStatus.innerText = "GPS wird gestartet...";
         navigator.geolocation.clearWatch(this.watchId);
     }
 
-    this.watchId = navigator.geolocation.watchPosition(
+    navigator.geolocation.getCurrentPosition(
 
         (position)=>{
 const gpsStatus = document.getElementById("gps-status");
