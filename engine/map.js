@@ -66,9 +66,12 @@ playerCircle: null,
     if(!mapElement || typeof L === "undefined") return;
 
     if(this.map){
-      this.map.remove();
-      this.map = null;
-    }
+  this.map.remove();
+  this.map = null;
+}
+
+this.playerMarker = null;
+this.playerCircle = null;
 
     const visiblePoints = this.getVisiblePoints(fall);
 
