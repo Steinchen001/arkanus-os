@@ -205,12 +205,13 @@ if(gpsStatus){
                 return;
             }
 
-            this.playerMarker = L.circleMarker([lat, lng], {
-    radius: 8,
-    color: "#00ffd0",
-    fillColor: "#00ffd0",
-    fillOpacity: 1,
-    weight: 3
+            this.playerMarker = L.marker([lat,lng], {
+    icon: L.divIcon({
+        className: "",
+        html: `<div class="player-location-dot"></div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
+    })
 }).addTo(this.map);
 
         },
