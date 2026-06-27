@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARKANUS OS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+
+<body>
+
+    <!-- Bootscreen -->
+    <div id="boot-screen">
+        <div class="boot-box">
+            <div class="boot-title">ARKANUS OS</div>
+            <div id="boot-text"></div>
+        </div>
+    </div>
+
+    <!-- Hauptsystem -->
+    <main id="app" class="hidden">
+
+        <header class="topbar">
+
+            <div>
+                <div class="system-label">ARKANUS RESEARCH NETWORK</div>
+                <h1>ARKANUS OS</h1>
+            </div>
+
+            <div class="access-badge">
+                ZUGRIFF: BESUCHER
+            </div>
+
+        </header>
+
+        <section class="layout">
+
+            <nav class="sidebar">
+
+                <button class="nav-btn active" data-view="cases">
+                    📁 Fallakten
+                </button>
+
+                <button class="nav-btn" data-view="audio">
+                    🎙 Audioprotokolle
+                </button>
+
+                <button class="nav-btn" data-view="map">
+                    🗺 Ermittlerkarte
+                </button>
+
+                <button class="nav-btn" data-view="documents">
+                    📜 Ermittlerakte
+                </button>
+
+                <button class="nav-btn" data-view="classified">
+                    🔒 Klassifiziert
+                </button>
+
+            </nav>
+
+            <section class="window">
+
+                <div class="window-header">
+
+                    <span id="window-title">
+                        FALLAKTEN
+                    </span>
+
+                    <span class="window-status">
+                        ONLINE
+                    </span>
+
+                </div>
+
+                <div class="window-content">
+
+                    <!-- Fälle -->
+                    <section id="cases" class="view active-view">
+                        <div id="case-grid" class="case-grid"></div>
+                    </section>
+
+                    <!-- Audio -->
+                    <section id="audio" class="view">
+
+                        <div class="terminal-note" id="audio-note">
+                            &gt; Keine Fallakte geladen<br>
+                            &gt; Öffne zuerst einen Fall
+                        </div>
+
+                        <div id="audio-list"></div>
+
+                    </section>
+
+                    <!-- Ermittlerkarte -->
+                    <section id="map" class="view">
+
+                        <div id="map-container">
+                            <article class="document-card">
+                                <span class="badge danger">KEINE AKTE GELADEN</span>
+                                <h2>Keine Ermittlerkarte verfügbar</h2>
+                                <p>Öffne zuerst eine Akte im Archiv.</p>
+                            </article>
+                        </div>
+
+                    </section>
+
+                    <!-- Ermittlerakte -->
+                    <section id="documents" class="view">
+
+                        <div id="documents-list"></div>
+
+                    </section>
+
+                    <!-- Gesperrt -->
+                    <section id="classified" class="view">
+
+                        <article class="classified-card">
+
+                            <h2>ZUGRIFF VERWEIGERT</h2>
+
+                            <p>
+                                Diese Daten sind klassifiziert.
+                                Weitere Feldcodes erforderlich.
+                            </p>
+
+                        </article>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+        </section>
+
+        <footer>
+            ARKANUS ENGINE // Version 1.0.0
+        </footer>
+
+    </main>
+
+    <!-- Kartenbibliothek -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Engine -->
+    <script src="engine/config.js"></script>
+    <script src="engine/loader.js"></script>
+    <script src="engine/caseLoader.js"></script>
+    <script src="engine/storage.js"></script>
+    <script src="engine/profile.js"></script>
+    <script src="engine/decrypt.js"></script>
+    <script src="engine/logbook.js"></script>
+    <script src="engine/map.js"></script>
+    <script src="engine/progress.js"></script>
+    <script src="engine/ui.js"></script>
+    <script src="engine/player.js"></script>
+    <script src="engine/archive.js"></script>
+    <script src="engine/dev.js"></script>
+    <script src="engine/app.js"></script>
+
+    <!-- Starter -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>

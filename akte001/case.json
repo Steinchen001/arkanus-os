@@ -1,0 +1,186 @@
+{
+  "id": "akte001",
+  "number": "001",
+  "internalId": "ARK-001",
+  "gcCode": "GCBP9P1",
+
+  "title": "Das letzte Protokoll",
+  "subtitle": "Eine Spur, die niemals hätte existieren dürfen.",
+
+  "status": "aktiv",
+  "type": "Multi-Geocache",
+  "difficulty": 3.5,
+  "terrain": 2.5,
+
+  "owner": "Mr_Steinchen",
+  "location": "Wil / Bronschhofen",
+
+  "cover": "akte001/bilder/cover.jpg",
+
+  "intro": "Professor Carlos Arkanus ist verschwunden. Zurück bleibt eine Spur aus Feldcodes, Audioprotokollen und Konstruktionen, die nur jemand verstehen soll, der gelernt hat, genauer hinzusehen.",
+
+  "stats": {
+    "chapters": 8,
+    "documents": 0,
+    "audios": 8,
+    "stations": 6
+  },
+
+  "chapters": [
+
+    {
+      "id": "prolog",
+      "title": "Prolog – Der Anfang von allem",
+      "label": "FREI",
+      "type": "intro",
+
+      "audio": "akte001/audio/prolog.mp3",
+      "text": "akte001/texte/prolog.html",
+
+      "code": null,
+
+      "map": {
+  "visible": "always",
+  "coordinates": {
+    "lat": "N47° 28.300",
+    "lng": "E009° 28.300"
+  }
+}
+    },
+
+    {
+      "id": "brief",
+      "title": "Der Brief",
+      "label": "FREI",
+      "type": "intro",
+
+      "audio": "akte001/audio/brief.mp3",
+      "text": "akte001/texte/brief.html",
+
+      "code": null,
+
+      "map": {
+        "visible": false,
+        "coordinates": null
+      }
+    },
+
+    {
+      "id": "kapitel01",
+      "title": "Kapitel 1 – Die erste Spur",
+      "label": "FELDCODE",
+      "type": "station",
+
+      "audio": "akte001/audio/kapitel01.mp3",
+      "text": "akte001/texte/kapitel01.html",
+
+      "code": "ALPHA7624",
+
+      "map": {
+        "visible": "after_unlock",
+        "coordinates": {
+          "lat": "N47° 28.300",
+          "lng": "E009° 28.300"
+        }
+      }
+    },
+
+    {
+      "id": "station02",
+      "title": "Station 2 – Die fünf Pforten",
+      "label": "FELDCODE",
+      "type": "station",
+
+      "audio": "akte001/audio/station02.mp3",
+      "text": "akte001/texte/station02.html",
+
+      "code": "BETA3816",
+
+      "map": {
+        "visible": "after_unlock",
+        "coordinates": {
+          "lat": "N47° 28.450",
+          "lng": "E009° 28.550"
+        }
+      }
+    },
+
+    {
+      "id": "pforten",
+      "title": "Audioprotokoll – Die fünf Pforten",
+      "label": "FELDCODE",
+      "type": "audio",
+
+      "audio": "akte001/audio/pforten.mp3",
+      "text": "akte001/texte/pforten.html",
+
+      "code": "GAMMA9042",
+
+      "map": {
+        "visible": false,
+        "coordinates": null
+      }
+    },
+
+    {
+      "id": "signal",
+      "title": "Kapitel 3 – Das Signal",
+      "label": "FELDCODE",
+      "type": "station",
+
+      "audio": "akte001/audio/signal.mp3",
+      "text": "akte001/texte/signal.html",
+
+      "code": "DELTA5179",
+
+      "map": {
+        "visible": "after_unlock",
+        "coordinates": {
+          "lat": "N47° 28.720",
+          "lng": "E009° 28.840"
+        }
+      }
+    },
+
+    {
+      "id": "maschine",
+      "title": "Kapitel 4 – Das Herz der Maschine",
+      "label": "FELDCODE",
+      "type": "station",
+
+      "audio": "akte001/audio/maschine.mp3",
+      "text": "akte001/texte/maschine.html",
+
+      "code": "OMEGA2026",
+
+      "map": {
+        "visible": "after_unlock",
+        "coordinates": {
+          "lat": "N47° 28.950",
+          "lng": "E009° 29.120"
+        }
+      }
+    },
+
+    {
+      "id": "epilog",
+      "title": "Epilog – Nach dem Öffnen",
+      "label": "FINAL",
+      "type": "final",
+
+      "audio": "akte001/audio/epilog.mp3",
+      "text": "akte001/texte/epilog.html",
+
+      "code": "ARKANUS",
+
+      "map": {
+        "visible": "after_unlock",
+        "coordinates": {
+          "lat": "N47° 29.150",
+          "lng": "E009° 29.350"
+        }
+      }
+    }
+
+  ]
+}

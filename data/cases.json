@@ -1,0 +1,58 @@
+[
+  {
+    "id": "akte001",
+    "number": "001",
+    "title": "Das letzte Protokoll",
+    "status": "aktiv",
+    "type": "Multi-Geocache",
+    "location": "Wil / Bronschhofen",
+    "folder": "akte001",
+    "cover": "akte001/bilder/cover.jpg",
+    "totalChapters": 8,
+    "gcCode": "GCBP9P1",
+    "internalId": "ARK-001",
+    "intro": "Professor Carlos Arkanus ist verschwunden. Zurück bleibt eine Spur aus Feldcodes, Audioprotokollen und Konstruktionen."
+  },
+  {
+    "id": "akte002",
+    "number": "002",
+    "title": "Signal Nord",
+    "status": "gesperrt",
+    "type": "Mystery",
+    "location": "klassifiziert",
+    "folder": "akte002",
+    "cover": null,
+    "totalChapters": 0,
+    "gcCode": "folgt",
+    "internalId": "ARK-002",
+    "intro": "Ein unbekanntes Signal wurde registriert. Zugriff noch nicht freigegeben."
+  },
+  {
+    "id": "akte003",
+    "number": "003",
+    "title": "Projekt Nullpunkt",
+    "status": "vorbereitung",
+    "type": "Wherigo",
+    "location": "klassifiziert",
+    "folder": "akte003",
+    "cover": null,
+    "totalChapters": 0,
+    "gcCode": "folgt",
+    "internalId": "ARK-003",
+    "intro": "Daten unvollständig. Eine weitere Versuchsanlage wird vermutet."
+  },
+  {
+    "id": "akte004",
+    "number": "004",
+    "title": "Schwarze Resonanz",
+    "status": "vorbereitung",
+    "type": "Multi-Geocache",
+    "location": "unbekannt",
+    "folder": "akte004",
+    "cover": null,
+    "totalChapters": 0,
+    "gcCode": "folgt",
+    "internalId": "ARK-004",
+    "intro": "Akte angelegt. Inhalte noch nicht freigegeben."
+  }
+]
