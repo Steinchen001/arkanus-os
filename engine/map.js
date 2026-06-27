@@ -204,19 +204,14 @@ if(gpsStatus){
                 return;
             }
 
-            this.playerMarker = L.circleMarker([lat,lng],{
-
-                radius:8,
-
-                color:"#0080ff",
-
-                fillColor:"#00aaff",
-
-                fillOpacity:1,
-
-                weight:3
-
-            }).addTo(this.map);
+            this.playerMarker = L.marker([lat,lng], {
+    icon: L.divIcon({
+        className: "",
+        html: `<div class="player-dot">📍</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 28]
+    })
+}).addTo(this.map);
 
         },
 
