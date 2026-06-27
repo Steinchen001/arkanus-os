@@ -818,3 +818,16 @@ box-shadow:0 0 8px #00ffd0;
 }
 
 }
+.gps-panel{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin:14px 0 10px;
+}
+
+.gps-status{
+  color:#9aa;
+  font-size:14px;
+  letter-spacing:.08em;
+}
