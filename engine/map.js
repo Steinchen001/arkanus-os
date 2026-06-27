@@ -190,7 +190,11 @@ if(gpsStatus) gpsStatus.innerText = "GPS wird gestartet...";
     this.watchId = navigator.geolocation.watchPosition(
 
         (position)=>{
+const gpsStatus = document.getElementById("gps-status");
 
+if(gpsStatus){
+    gpsStatus.innerText = "GPS verbunden ✔";
+}
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             const accuracy = position.coords.accuracy;
@@ -230,11 +234,18 @@ if(gpsStatus) gpsStatus.innerText = "GPS wird gestartet...";
 
         },
 
-        ()=>{
+        (error)=>{
 
-            console.log("GPS deaktiviert.");
+    console.log(error);
 
-        },
+    const gpsStatus = document.getElementById("gps-status");
+
+    if(gpsStatus){
+        gpsStatus.innerText =
+            `Fehler ${error.code}: ${error.message}`;
+    }
+
+},
 
         {
 
