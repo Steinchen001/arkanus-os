@@ -5,7 +5,6 @@ const MapSystem = {
   
   watchId: null,
 playerMarker: null,
-playerCircle: null,
 
   init(){
     // Platzhalter für spätere Kartenfunktionen
@@ -71,7 +70,6 @@ playerCircle: null,
 }
 
 this.playerMarker = null;
-this.playerCircle = null;
 
     const visiblePoints = this.getVisiblePoints(fall);
 
