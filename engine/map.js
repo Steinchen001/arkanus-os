@@ -201,8 +201,6 @@ if(gpsStatus){
 
             if(this.playerMarker){
                 this.playerMarker.setLatLng([lat,lng]);
-                this.playerCircle.setLatLng([lat,lng]);
-                this.playerCircle.setRadius(accuracy);
                 return;
             }
 
@@ -217,18 +215,6 @@ if(gpsStatus){
                 fillOpacity:1,
 
                 weight:3
-
-            }).addTo(this.map);
-
-            this.playerCircle = L.circle([lat,lng],{
-
-                radius:accuracy,
-
-                color:"#0080ff",
-
-                fillOpacity:0.15,
-
-                weight:1
 
             }).addTo(this.map);
 
