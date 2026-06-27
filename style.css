@@ -855,8 +855,3 @@ box-shadow:0 0 8px #00ffd0;
   position: relative !important;
   z-index: 1 !important;
 }
-.player-dot{
-  font-size:26px;
-  line-height:28px;
-  filter: drop-shadow(0 0 6px #0080ff);
-}
