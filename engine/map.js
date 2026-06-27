@@ -34,7 +34,16 @@ playerCircle: null,
         <h2>${fall.title}</h2>
         <p class="meta">Interaktive Stationskarte // Marker erscheinen nach Freischaltung</p>
 
-        <div id="leaflet-map"></div>
+        <div class="gps-panel">
+  <button id="gps-start-btn" class="secondary-btn">
+    📡 Standort aktivieren
+  </button>
+  <div id="gps-status" class="gps-status">
+    GPS nicht aktiv
+  </div>
+</div>
+
+<div id="leaflet-map"></div>
 
         <ul class="mission-list map-station-list">
           ${fall.chapters.map(chapter => {
@@ -125,7 +134,6 @@ const marker = L.marker([point.lat, point.lng], {
     setTimeout(() => {
     this.map.invalidateSize();
 }, 250);
-this.startGps();
 
 // Entwickler: Klick auf Karte
 this.map.on("click", (e) => {
@@ -148,7 +156,13 @@ ${lng}<br><br>
         .openOn(this.map);
 
 });
+const gpsBtn = document.getElementById("gps-start-btn");
 
+if (gpsBtn) {
+    gpsBtn.onclick = () => {
+        this.startGps();
+    };
+}
 },
 startGps(){
 
