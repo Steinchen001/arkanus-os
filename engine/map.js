@@ -212,6 +212,7 @@ if(gpsStatus){
     fillOpacity:1,
     weight:3
 }).addTo(this.map);
+this.map.setView([lat, lng], 14);
 
         },
 
