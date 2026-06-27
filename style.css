@@ -855,3 +855,11 @@ box-shadow:0 0 8px #00ffd0;
   position: relative !important;
   z-index: 1 !important;
 }
+.player-location-dot{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#00aaff;
+  border:3px solid #ffffff;
+  box-shadow:0 0 10px rgba(0,170,255,.9);
+}
