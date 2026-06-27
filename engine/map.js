@@ -159,14 +159,29 @@ ${lng}<br><br>
 const gpsBtn = document.getElementById("gps-start-btn");
 
 if (gpsBtn) {
-    gpsBtn.onclick = () => {
+    gpsBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         this.startGps();
-    };
+    });
+
+    gpsBtn.addEventListener("touchend", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        this.startGps();
+    });
 }
 },
 startGps(){
 
-    if(!navigator.geolocation) return;
+    const gpsStatus = document.getElementById("gps-status");
+
+if(!navigator.geolocation){
+    if(gpsStatus) gpsStatus.innerText = "GPS nicht unterstützt";
+    return;
+}
+
+if(gpsStatus) gpsStatus.innerText = "GPS wird gestartet...";
 
     if(this.watchId){
         navigator.geolocation.clearWatch(this.watchId);
