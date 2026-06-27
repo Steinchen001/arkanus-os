@@ -5,6 +5,7 @@ const MapSystem = {
   
   watchId: null,
 playerMarker: null,
+lastPlayerPosition: null,
 
   init(){
     // Platzhalter für spätere Kartenfunktionen
@@ -106,11 +107,14 @@ const marker = L.marker([point.lat, point.lng], {
 });
 
       marker.bindPopup(`
-        <strong>${point.title}</strong><br>
-        Status: freigegeben<br>
-        ${point.rawLat}<br>
-        ${point.rawLng}
-      `);
+  <strong>${point.title}</strong><br>
+  Status: freigegeben<br>
+  ${point.rawLat}<br>
+  ${point.rawLng}<br><br>
+  <a href="https://maps.apple.com/?daddr=${point.lat},${point.lng}" target="_blank">
+    🧭 Navigation starten
+  </a>
+`);
 
       marker.addTo(this.layerGroup);
     });
@@ -199,6 +203,14 @@ if(gpsStatus){
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             const accuracy = position.coords.accuracy;
+            this.lastPlayerPosition = { lat, lng };
+
+this.updateGpsDistance(lat, lng);
+
+const gpsBtn = document.getElementById("gps-start-btn");
+if(gpsBtn){
+    gpsBtn.innerText = "🔄 Standort aktualisieren";
+}
 
             if(this.playerMarker){
     this.playerMarker.setLatLng([lat,lng]);
@@ -243,6 +255,60 @@ this.map.setView([lat, lng], 14);
 
     );
 
+},
+updateGpsDistance(playerLat, playerLng){
+    const gpsStatus = document.getElementById("gps-status");
+    if(!gpsStatus || !this.activeFall) return;
+
+    const points = this.getVisiblePoints(this.activeFall);
+    if(!points.length){
+        gpsStatus.innerText = "GPS verbunden ✔";
+        return;
+    }
+
+    let nearest = null;
+    let nearestDistance = Infinity;
+
+    points.forEach(point => {
+        const distance = this.getDistanceMeters(
+            playerLat,
+            playerLng,
+            point.lat,
+            point.lng
+        );
+
+        if(distance < nearestDistance){
+            nearestDistance = distance;
+            nearest = point;
+        }
+    });
+
+    if(!nearest) return;
+
+    const distanceText = nearestDistance >= 1000
+        ? (nearestDistance / 1000).toFixed(2) + " km"
+        : Math.round(nearestDistance) + " m";
+
+    gpsStatus.innerText = `GPS verbunden ✔ // Nächste Station: ${distanceText}`;
+},
+
+getDistanceMeters(lat1, lng1, lat2, lng2){
+    const R = 6371000;
+    const toRad = value => value * Math.PI / 180;
+
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
 },
 getVisiblePoints(fall){
     return fall.chapters
