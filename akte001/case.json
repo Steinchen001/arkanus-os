@@ -41,6 +41,9 @@
 
       "map": {
   "visible": "always",
+  "requiresLocation": true,
+  "unlockRadius": 25,
+  "requiresCode": false,
   "coordinates": {
     "lat": "N47° 28.300",
     "lng": "E009° 28.300"
