@@ -109,21 +109,22 @@
     },
 
     {
-      "id": "pforten",
-      "title": "Die fünf Pforten",
-      "label": "FELDCODE",
-      "type": "audio",
+  "id": "pforten",
+  "title": "Die fünf Pforten",
+  "label": "RÄTSEL",
+  "type": "puzzle",
 
-      "audio": "akte001/audio/pforten.mp3",
-      "text": "akte001/texte/pforten.html",
+  "audio": "akte001/audio/pforten.mp3",
+  "text": "akte001/texte/pforten.html",
 
-      "code": "GAMMA9042",
+  "code": null,
+  "unlockAfterInteraction": "station02",
 
-      "map": {
-        "visible": false,
-        "coordinates": null
-      }
-    },
+  "map": {
+    "visible": false,
+    "coordinates": null
+  }
+},
 
     {
       "id": "signal",
