@@ -183,6 +183,8 @@ renderDocuments(){
         <div class="profile-field"><span>XP</span><strong>${stats.xp}</strong></div>
         <div class="profile-field"><span>Erfolge</span><strong>${stats.achievements}</strong></div>
         <div class="profile-field"><span>Freigegebene Sequenzen</span><strong>${stats.unlocked}</strong></div>
+        <div class="profile-field"><span>Mitglied seit</span><strong>${Profile.getCreatedDate()}</strong></div>
+        <div class="profile-field"><span>Status</span><strong>AKTIV</strong></div>
         <div class="profile-field"><span>Systemereignisse</span><strong>${stats.logs}</strong></div>
         <div class="profile-field"><span>Letzte Akte</span><strong>${lastFall || "Keine"}</strong></div>
         <div class="profile-field"><span>Letzter Zugriff</span><strong>${lastVisitText}</strong></div>
