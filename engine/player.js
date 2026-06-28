@@ -100,7 +100,7 @@ const Player = {
 
   getLockedBadge(chapter, locationReached){
     if(chapter.unlockAfterInteraction){
-      return "WARTET";
+      return "RÄTSEL";
     }
 
     if(chapter.map && chapter.map.requiresLocation && !locationReached){
@@ -120,8 +120,8 @@ const Player = {
       return `
         <p>🧩 Rätsel gesperrt.</p>
         <p class="meta">
-          Wird automatisch freigegeben, sobald "${sourceTitle}" gehört
-          oder das Transkript geöffnet wurde.
+          Dieses Rätsel wird automatisch freigeschaltet, sobald das Audioprotokoll
+"${sourceTitle}" gehört oder das Transkript geöffnet wurde.
         </p>
       `;
     }
