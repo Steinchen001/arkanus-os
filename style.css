@@ -1042,3 +1042,24 @@ box-shadow:0 0 8px #00ffd0;
   letter-spacing:2px;
   box-shadow:0 0 18px rgba(255,176,0,.18);
 }
+.mission-hud{
+  margin:14px 0 0;
+  border:1px solid rgba(0,255,208,.35);
+  border-radius:14px;
+  padding:12px 14px;
+  background:rgba(5,7,8,.88);
+  box-shadow:0 0 18px rgba(0,255,208,.12);
+}
+
+.mission-hud-label{
+  color:var(--gold);
+  font-family:monospace;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:4px;
+}
+
+#mission-hud-title{
+  color:var(--cyan);
+  font-weight:bold;
+}
