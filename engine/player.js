@@ -36,7 +36,13 @@ const Player = {
     this.elements.audioList.innerHTML = "";
 
     fall.chapters.forEach((chapter, index) => {
-      const isUnlocked = !chapter.code || Storage.isUnlocked(fall.id, chapter.id);
+      const isAutoLocked =
+        chapter.unlockAfterInteraction &&
+        !Storage.isUnlocked(fall.id, chapter.id);
+
+      const isUnlocked =
+        (!chapter.code && !isAutoLocked) ||
+        Storage.isUnlocked(fall.id, chapter.id);
 
       const requiresLocation =
         chapter.map &&
@@ -52,16 +58,13 @@ const Player = {
       station.className = "station" + (isUnlocked ? "" : " locked");
 
       station.innerHTML = `
-        <span class="badge ${isUnlocked ? "active" : locationReached ? "active" : "danger"}">
-          ${isUnlocked ? "FREIGEGEBEN" : locationReached ? chapter.label : "POSITION FEHLT"}
+        <span class="badge ${isUnlocked ? "active" : locationReached && !isAutoLocked ? "active" : "danger"}">
+          ${isUnlocked ? "FREIGEGEBEN" : this.getLockedBadge(chapter, locationReached)}
         </span>
 
         <h2>${String(index + 1).padStart(2, "0")} // ${chapter.title}</h2>
 
-        ${requiresLocation && !locationReached && !isUnlocked ? `
-          <p>📍 Position noch nicht bestätigt.</p>
-          <p class="meta">Begib dich zur markierten Station und aktiviere GPS.</p>
-        ` : ""}
+        ${this.getLockedMessage(fall, chapter, isUnlocked, locationReached, isAutoLocked)}
 
         ${chapter.code && !isUnlocked && canEnterCode ? `
           <p>Archivschlüssel erforderlich.</p>
@@ -71,7 +74,7 @@ const Player = {
         ` : ""}
 
         <div class="player ${isUnlocked ? "" : "hidden"}">
-          <audio controls>
+          <audio controls data-chapter="${chapter.id}">
             <source src="${chapter.audio}" type="audio/mpeg">
             Dein Browser unterstützt keine Audios.
           </audio>
@@ -88,10 +91,49 @@ const Player = {
         this.bindUnlock(station, fall, chapter);
       }
 
+      this.bindAudioInteraction(station, fall, chapter);
       this.bindTranscript(station, fall, chapter);
 
       this.elements.audioList.appendChild(station);
     });
+  },
+
+  getLockedBadge(chapter, locationReached){
+    if(chapter.unlockAfterInteraction){
+      return "WARTET";
+    }
+
+    if(chapter.map && chapter.map.requiresLocation && !locationReached){
+      return "POSITION FEHLT";
+    }
+
+    return chapter.label || "GESPERRT";
+  },
+
+  getLockedMessage(fall, chapter, isUnlocked, locationReached, isAutoLocked){
+    if(isUnlocked) return "";
+
+    if(isAutoLocked){
+      const source = fall.chapters.find(item => item.id === chapter.unlockAfterInteraction);
+      const sourceTitle = source ? source.title : "vorherige Akte";
+
+      return `
+        <p>🧩 Rätsel gesperrt.</p>
+        <p class="meta">
+          Wird automatisch freigegeben, sobald "${sourceTitle}" gehört
+          oder das Transkript geöffnet wurde.
+        </p>
+      `;
+    }
+
+    if(chapter.map && chapter.map.requiresLocation && !locationReached){
+      return `
+        <p>📍 Position noch nicht bestätigt.</p>
+        <p class="meta">Begib dich zur markierten Station und aktiviere GPS.</p>
+      `;
+    }
+
+    return "";
   },
 
   bindUnlock(station, fall, chapter){
@@ -135,6 +177,50 @@ const Player = {
     });
   },
 
+  bindAudioInteraction(station, fall, chapter){
+    const audio = station.querySelector("audio");
+    if(!audio) return;
+
+    audio.addEventListener("play", () => {
+      this.unlockInteractionTargets(fall, chapter);
+    }, { once: true });
+  },
+
+  unlockInteractionTargets(fall, sourceChapter){
+    const targets = fall.chapters.filter(chapter =>
+      chapter.unlockAfterInteraction === sourceChapter.id
+    );
+
+    if(!targets.length) return;
+
+    let unlockedSomething = false;
+
+    targets.forEach(target => {
+      if(!Storage.isUnlocked(fall.id, target.id)){
+        Storage.unlock(fall.id, target.id);
+        Storage.log("Automatisch freigegeben: " + target.title);
+        unlockedSomething = true;
+      }
+    });
+
+    if(unlockedSomething){
+      Decrypt.show("Neue Aktensequenz freigegeben", [
+        "Audioprotokoll ausgewertet",
+        "Verknüpfte Daten gefunden",
+        "Rätselmodul entschlüsselt",
+        "Zugriff auf neue Sequenz gewährt"
+      ]);
+
+      setTimeout(() => {
+        Decrypt.hide();
+        this.render(fall);
+        Archive.renderCases();
+        Archive.renderDocuments();
+        Profile.updateBadge();
+      }, 1800);
+    }
+  },
+
   bindTranscript(station, fall, chapter){
     const transcriptBtn = station.querySelector(".transcript-btn");
     const box = station.querySelector(".transcript");
@@ -147,6 +233,8 @@ const Player = {
         transcriptBtn.innerText = "📄 Transkript anzeigen";
         return;
       }
+
+      this.unlockInteractionTargets(fall, chapter);
 
       transcriptBtn.innerText = "📄 Transkript ausblenden";
       box.classList.remove("hidden");
