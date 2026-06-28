@@ -30,37 +30,28 @@ const Player = {
       &gt; Ermittler: ${Profile.getName()}<br>
       &gt; Audioprotokolle gefunden: ${fall.chapters.length}<br>
       &gt; Freigeschaltet: ${progress.unlocked} / ${progress.total}<br>
-      &gt; Fortschritt wird lokal auf diesem Gerät gespeichert
+      &gt; Fortschritt wird lokal auf diesem Gerät gespeichert<br><br>
+      ${this.renderProgressList(fall)}
     `;
 
     this.elements.audioList.innerHTML = "";
 
     fall.chapters.forEach((chapter, index) => {
       const status = Storage.getChapterStatus(fall, chapter);
-const isUnlocked = status === "unlocked";
-const canEnterCode = Storage.canEnterCode(fall, chapter);
-
-const requiresLocation =
-  chapter.map &&
-  chapter.map.requiresLocation === true;
-
-const locationReached =
-  !requiresLocation ||
-  Storage.isLocationReached(fall.id, chapter.id);
-
-const isAutoLocked = status === "waiting";
+      const isUnlocked = status === "unlocked";
+      const canEnterCode = Storage.canEnterCode(fall, chapter);
 
       const station = document.createElement("article");
       station.className = "station" + (isUnlocked ? "" : " locked");
 
       station.innerHTML = `
-        <span class="badge ${isUnlocked ? "active" : locationReached && !isAutoLocked ? "active" : "danger"}">
-          ${isUnlocked ? "FREIGEGEBEN" : this.getLockedBadge(chapter, locationReached)}
+        <span class="badge ${isUnlocked ? "active" : status === "location_missing" ? "danger" : "danger"}">
+          ${this.getBadgeText(chapter, status)}
         </span>
 
         <h2>${String(index + 1).padStart(2, "0")} // ${chapter.title}</h2>
 
-        ${this.getLockedMessage(fall, chapter, isUnlocked, locationReached, isAutoLocked)}
+        ${this.getStatusMessage(fall, chapter, status)}
 
         ${chapter.code && !isUnlocked && canEnterCode ? `
           <p>Archivschlüssel erforderlich.</p>
@@ -94,22 +85,33 @@ const isAutoLocked = status === "waiting";
     });
   },
 
-  getLockedBadge(chapter, locationReached){
-    if(chapter.unlockAfterInteraction){
-      return "RÄTSEL";
-    }
+  renderProgressList(fall){
+    return fall.chapters.map((chapter, index) => {
+      const status = Storage.getChapterStatus(fall, chapter);
 
-    if(chapter.map && chapter.map.requiresLocation && !locationReached){
-      return "POSITION FEHLT";
-    }
+      let icon = "🔒";
 
+      if(status === "unlocked") icon = "✓";
+      if(status === "location_missing") icon = "📍";
+      if(status === "waiting") icon = "🧩";
+      if(status === "code_required") icon = "🔑";
+
+      return `&gt; ${String(index + 1).padStart(2, "0")} ${icon} ${chapter.title}`;
+    }).join("<br>");
+  },
+
+  getBadgeText(chapter, status){
+    if(status === "unlocked") return "FREIGEGEBEN";
+    if(status === "waiting") return "RÄTSEL";
+    if(status === "location_missing") return "POSITION FEHLT";
+    if(status === "code_required") return chapter.label || "FELDCODE";
     return chapter.label || "GESPERRT";
   },
 
-  getLockedMessage(fall, chapter, isUnlocked, locationReached, isAutoLocked){
-    if(isUnlocked) return "";
+  getStatusMessage(fall, chapter, status){
+    if(status === "unlocked") return "";
 
-    if(isAutoLocked){
+    if(status === "waiting"){
       const source = fall.chapters.find(item => item.id === chapter.unlockAfterInteraction);
       const sourceTitle = source ? source.title : "vorherige Akte";
 
@@ -117,19 +119,29 @@ const isAutoLocked = status === "waiting";
         <p>🧩 Rätsel gesperrt.</p>
         <p class="meta">
           Dieses Rätsel wird automatisch freigeschaltet, sobald das Audioprotokoll
-"${sourceTitle}" gehört oder das Transkript geöffnet wurde.
+          "${sourceTitle}" gehört oder das Transkript geöffnet wurde.
         </p>
       `;
     }
 
-    if(chapter.map && chapter.map.requiresLocation && !locationReached){
+    if(status === "location_missing"){
       return `
         <p>📍 Position noch nicht bestätigt.</p>
         <p class="meta">Begib dich zur markierten Station und aktiviere GPS.</p>
       `;
     }
 
-    return "";
+    if(status === "code_required"){
+      return `
+        <p>🔑 Feldcode erforderlich.</p>
+        <p class="meta">Der nächste Zugriff ist verschlüsselt.</p>
+      `;
+    }
+
+    return `
+      <p>🔒 Zugriff gesperrt.</p>
+      <p class="meta">Weitere Ermittlungsdaten erforderlich.</p>
+    `;
   },
 
   bindUnlock(station, fall, chapter){
@@ -200,11 +212,14 @@ const isAutoLocked = status === "waiting";
     });
 
     if(unlockedSomething){
-      Decrypt.show("Neue Aktensequenz freigegeben", [
-        "Audioprotokoll ausgewertet",
+      const names = targets.map(t => t.title).join(", ");
+
+      Decrypt.show("ARKANUS SYSTEM", [
+        "Audioprotokoll vollständig ausgewertet",
         "Verknüpfte Daten gefunden",
         "Rätselmodul entschlüsselt",
-        "Zugriff auf neue Sequenz gewährt"
+        "Neue Ermittlungssequenz verfügbar",
+        "Freigegeben: " + names
       ]);
 
       setTimeout(() => {
@@ -213,7 +228,7 @@ const isAutoLocked = status === "waiting";
         Archive.renderCases();
         Archive.renderDocuments();
         Profile.updateBadge();
-      }, 1800);
+      }, 2200);
     }
   },
 
