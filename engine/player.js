@@ -178,7 +178,12 @@ const Player = {
           Archive.renderCases();
           Archive.renderDocuments();
           Profile.updateBadge();
-          if(typeof Completion !== "undefined"){
+
+if(typeof Mission !== "undefined"){
+  Mission.updateHud(fall);
+}
+
+if(typeof Completion !== "undefined"){
   Completion.show(fall);
 }
         }, 2400);
@@ -231,6 +236,10 @@ const Player = {
   Archive.renderCases();
   Archive.renderDocuments();
   Profile.updateBadge();
+
+  if(typeof Mission !== "undefined"){
+    Mission.updateHud(fall);
+  }
 }, 2300);
     }
   },
