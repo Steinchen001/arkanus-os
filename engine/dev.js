@@ -34,10 +34,16 @@ const Dev = {
         <p class="meta">Nur für Ersteller sichtbar // ?dev=1</p>
 
         <div class="dev-actions">
-          <button class="primary-btn" onclick="Dev.resetLocalProgress()">
-            Speicherstand dieses Geräts zurücksetzen
-          </button>
-        </div>
+
+  <button class="primary-btn" onclick="Dev.resetCurrentCase()">
+    🧨 Aktive Akte zurücksetzen
+  </button>
+
+  <button class="primary-btn" onclick="Dev.resetLocalProgress()">
+    💾 Gesamten lokalen Speicher löschen
+  </button>
+
+</div>
 
         <div id="dev-content">
           <p>Lade Akten...</p>
@@ -137,7 +143,43 @@ const Dev = {
     alert("Lokaler Speicherstand gelöscht. Seite wird neu geladen.");
     location.reload();
   },
+resetLocalProgress(){
+  ...
+},
 
+resetCurrentCase(){
+
+  const fall = Archive.getActiveFall();
+
+  if(!fall){
+    alert("Keine Akte geöffnet.");
+    return;
+  }
+
+  const ok = confirm(
+    `Den Fortschritt von "${fall.title}" wirklich zurücksetzen?`
+  );
+
+  if(!ok) return;
+
+  Storage.resetFall(fall.id);
+
+  Player.render(fall);
+  Archive.renderCases();
+  Archive.renderDocuments();
+
+  const map = document.getElementById("map-container");
+  if(map){
+    map.innerHTML = MapSystem.render(fall);
+  }
+
+  alert("Akte erfolgreich zurückgesetzt.");
+},
+
+close(){
+  const overlay = document.getElementById("dev-overlay");
+  if(overlay) overlay.classList.remove("active");
+}
   close(){
     const overlay = document.getElementById("dev-overlay");
     if(overlay) overlay.classList.remove("active");
