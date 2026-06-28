@@ -30,6 +30,7 @@ const Player = {
       &gt; Ermittler: ${Profile.getName()}<br>
       &gt; Audioprotokolle gefunden: ${fall.chapters.length}<br>
       &gt; Zugriffsebene: ${progress.unlocked} / ${progress.total} Sequenzen verfügbar<br>
+      &gt; ${Mission.getStatusText(fall)}<br>
       &gt; Fortschritt wird lokal auf diesem Gerät gespeichert<br><br>
       ${this.renderProgressList(fall)}
     `;
