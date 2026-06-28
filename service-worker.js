@@ -1,10 +1,14 @@
-const CACHE_NAME = "arkanus-os-v1";
+const CACHE_NAME = "arkanus-os-v2";
 
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/style.css",
   "/manifest.json",
+  "/pwa.js",
+
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
 
   "/engine/config.js",
   "/engine/loader.js",
@@ -22,6 +26,7 @@ const FILES_TO_CACHE = [
   "/engine/app.js",
 
   "/app.js",
+
   "/data/cases.json",
   "/data/settings.json",
   "/data/ranks.json",
@@ -31,6 +36,8 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener("install", event => {
+  self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
   );
@@ -46,12 +53,21 @@ self.addEventListener("activate", event => {
       )
     )
   );
+
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
+  if(event.request.method !== "GET") return;
+
   event.respondWith(
     caches.match(event.request).then(cached => {
-      return cached || fetch(event.request);
+      return cached || fetch(event.request).then(response => {
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
     })
   );
 });
