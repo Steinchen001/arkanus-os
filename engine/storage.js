@@ -203,7 +203,7 @@ const Storage = {
     };
   },
   
-    resetFall(fallId){
+  resetFall(fallId){
     const keysToDelete = [];
 
     for(let i = 0; i < localStorage.length; i++){
