@@ -39,6 +39,7 @@ const Storage = {
   isUnlocked(fallId, chapterId){
     return localStorage.getItem(this.key(fallId, chapterId)) === "true";
   },
+
   setLocationReached(fallId, chapterId){
     localStorage.setItem(this.key(fallId, chapterId, "location"), "true");
   },
@@ -46,12 +47,65 @@ const Storage = {
   isLocationReached(fallId, chapterId){
     return localStorage.getItem(this.key(fallId, chapterId, "location")) === "true";
   },
+
   markRead(fallId, chapterId){
     localStorage.setItem(this.key(fallId, chapterId, "read"), "true");
   },
 
   isRead(fallId, chapterId){
     return localStorage.getItem(this.key(fallId, chapterId, "read")) === "true";
+  },
+
+  canAccessChapter(fall, chapter){
+    if(!fall || !chapter) return false;
+
+    if(!chapter.code && !chapter.unlockAfterInteraction){
+      return true;
+    }
+
+    if(this.isUnlocked(fall.id, chapter.id)){
+      return true;
+    }
+
+    return false;
+  },
+
+  canEnterCode(fall, chapter){
+    if(!fall || !chapter || !chapter.code) return false;
+
+    const requiresLocation =
+      chapter.map &&
+      chapter.map.requiresLocation === true;
+
+    if(requiresLocation && !this.isLocationReached(fall.id, chapter.id)){
+      return false;
+    }
+
+    return true;
+  },
+
+  getChapterStatus(fall, chapter){
+    if(this.canAccessChapter(fall, chapter)){
+      return "unlocked";
+    }
+
+    if(chapter.unlockAfterInteraction){
+      return "waiting";
+    }
+
+    const requiresLocation =
+      chapter.map &&
+      chapter.map.requiresLocation === true;
+
+    if(requiresLocation && !this.isLocationReached(fall.id, chapter.id)){
+      return "location_missing";
+    }
+
+    if(chapter.code){
+      return "code_required";
+    }
+
+    return "locked";
   },
 
   saveLastFall(fallId){
@@ -109,8 +163,10 @@ const Storage = {
 
       if(
         key &&
-        key.startsWith(this.prefix + "fall") &&
-        localStorage.getItem(key) === "true"
+        key.startsWith(this.prefix + "akte") &&
+        localStorage.getItem(key) === "true" &&
+        !key.endsWith("_read") &&
+        !key.endsWith("_location")
       ){
         count++;
       }
@@ -129,7 +185,8 @@ const Storage = {
         key &&
         key.startsWith(this.prefix + fallId + "_") &&
         localStorage.getItem(key) === "true" &&
-        !key.endsWith("_read")
+        !key.endsWith("_read") &&
+        !key.endsWith("_location")
       ){
         unlocked++;
       }
