@@ -285,11 +285,21 @@ updateGpsDistance(playerLat, playerLng){
 
     if(!nearest) return;
 
-    const distanceText = nearestDistance >= 1000
-        ? (nearestDistance / 1000).toFixed(2) + " km"
-        : Math.round(nearestDistance) + " m";
+const distanceText = nearestDistance >= 1000
+    ? (nearestDistance / 1000).toFixed(2) + " km"
+    : Math.round(nearestDistance) + " m";
 
-    gpsStatus.innerText = `GPS verbunden ✔ // Nächste Station: ${distanceText}`;
+if(nearest.requiresLocation && nearestDistance <= nearest.unlockRadius){
+
+    gpsStatus.innerText =
+        `📍 Station erreicht ✔ // ${nearest.requiresCode ? "Schlüssel erforderlich" : "Kein Schlüssel nötig"}`;
+
+}else{
+
+    gpsStatus.innerText =
+        `GPS verbunden ✔ // Nächste Station: ${distanceText}`;
+
+}
 },
 
 getDistanceMeters(lat1, lng1, lat2, lng2){
