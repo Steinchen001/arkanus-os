@@ -80,15 +80,21 @@ const Profile = {
     });
   },
 
-  updateBadge(){
-    const badge = document.querySelector(".access-badge");
-    if(!badge) return;
+updateBadge(){
+  const badge = document.querySelector(".access-badge");
+  if(!badge) return;
 
-    badge.innerHTML = `
-      ERMITTLER: ${this.getName()}<br>
-      <span style="color:#00ffd0">${this.getClearance()}</span>
-    `;
-  },
+  const rank =
+    typeof Stats !== "undefined"
+      ? Stats.getRank()
+      : this.getClearance();
+
+  badge.innerHTML = `
+    ERMITTLER: ${this.getName()}<br>
+    <span style="color:#00ffd0">${rank}</span><br>
+    <span style="color:#8b949e">${this.getServiceNumber()}</span>
+  `;
+},
 
   showSetup(onDone){
     let overlay = document.getElementById("profile-overlay");
