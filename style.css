@@ -629,21 +629,29 @@ footer{
 
 #dev-button{
     position:fixed;
-    bottom:20px;
-    right:20px;
-    z-index:9999;
+    right:16px;
+    bottom:16px;
+    width:56px;
+    height:56px;
 
-    background:#00ffe0;
-    color:#000;
-    border:none;
-    border-radius:12px;
-    padding:10px 16px;
+    border-radius:50%;
+    border:1px solid rgba(0,255,208,.35);
 
-    font-family:monospace;
-    font-weight:bold;
-    cursor:pointer;
+    background:rgba(5,7,8,.75);
+    backdrop-filter:blur(12px);
 
-    box-shadow:0 0 18px rgba(0,255,220,.45);
+    color:var(--cyan);
+    font-size:24px;
+
+    box-shadow:0 0 18px rgba(0,255,208,.25);
+
+    opacity:.45;
+    transition:.25s;
+}
+
+#dev-button:hover{
+    opacity:1;
+    transform:scale(1.08);
 }
 
 #dev-overlay{
