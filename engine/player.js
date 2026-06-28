@@ -214,13 +214,13 @@ const Player = {
     if(unlockedSomething){
       const names = targets.map(t => t.title).join(", ");
 
-      Decrypt.show("ARKANUS SYSTEM", [
-        "Audioprotokoll vollständig ausgewertet",
-        "Verknüpfte Daten gefunden",
-        "Rätselmodul entschlüsselt",
-        "Neue Ermittlungssequenz verfügbar",
-        "Freigegeben: " + names
-      ]);
+      Feedback.notify("ARKANUS SYSTEM", [
+  "Audioprotokoll vollständig ausgewertet",
+  "Verknüpfte Daten gefunden",
+  "Rätselmodul entschlüsselt",
+  "Neue Ermittlungssequenz verfügbar",
+  "Freigegeben: " + names
+]);
 
       setTimeout(() => {
         Decrypt.hide();
