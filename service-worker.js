@@ -1,4 +1,4 @@
-const CACHE_NAME = "arkanus-os-v2";
+const CACHE_NAME = "arkanus-os-v3";
 
 const FILES_TO_CACHE = [
   "/",
@@ -9,6 +9,8 @@ const FILES_TO_CACHE = [
 
   "/icons/icon-192.png",
   "/icons/icon-512.png",
+
+  "/app.js",
 
   "/engine/config.js",
   "/engine/loader.js",
@@ -24,8 +26,6 @@ const FILES_TO_CACHE = [
   "/engine/archive.js",
   "/engine/dev.js",
   "/engine/app.js",
-
-  "/app.js",
 
   "/data/cases.json",
   "/data/settings.json",
@@ -62,11 +62,18 @@ self.addEventListener("fetch", event => {
 
   event.respondWith(
     caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).then(response => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, response.clone());
-          return response;
+      if(cached) return cached;
+
+      return fetch(event.request).then(response => {
+        const copy = response.clone();
+
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, copy);
         });
+
+        return response;
+      }).catch(() => {
+        return caches.match("/index.html");
       });
     })
   );
