@@ -1,4 +1,4 @@
-const CACHE_NAME = "arkanus-os-v5";
+const CACHE_NAME = "arkanus-os-v6";
 
 const FILES_TO_CACHE = [
   "/",
@@ -13,6 +13,7 @@ const FILES_TO_CACHE = [
   "/app.js",
 
   "/engine/config.js",
+  "/engine/version.js",
   "/engine/loader.js",
   "/engine/caseLoader.js",
   "/engine/storage.js",
