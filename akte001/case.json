@@ -3,201 +3,158 @@
   "number": "001",
   "internalId": "ARK-001",
   "gcCode": "GCBP9P1",
-
   "title": "Das letzte Protokoll",
   "subtitle": "Eine Spur, die niemals hätte existieren dürfen.",
-
   "status": "aktiv",
   "type": "Multi-Geocache",
   "difficulty": 3.5,
   "terrain": 2.5,
-
   "owner": "Mr_Steinchen",
   "location": "Bettwiesen / Tobel-Tägerschen",
-
   "cover": "akte001/bilder/cover.jpg",
-
   "intro": "Professor Carlos Arkanus ist verschwunden. Zurück bleibt eine Spur aus Feldcodes, Audioprotokollen und Konstruktionen, die nur jemand verstehen soll, der gelernt hat, genauer hinzusehen.",
-
   "stats": {
     "chapters": 9,
     "documents": 0,
     "audios": 9,
     "stations": 6
   },
-
   "chapters": [
-
     {
       "id": "prolog",
       "title": "Prolog",
       "label": "FREI",
       "type": "intro",
-
       "audio": "akte001/audio/prolog.mp3",
       "text": "akte001/texte/prolog.html",
-
       "code": null,
-
-      "map": {
-  "visible": false,
-  "coordinates": null
-}
-    },
-
-    {
-      "id": "brief",
-      "title": "Der Brief",
-      "label": "FREI",
-      "type": "intro",
-
-      "audio": "akte001/audio/brief.mp3",
-      "text": "akte001/texte/brief.html",
-
-      "code": null,
-
       "map": {
         "visible": false,
         "coordinates": null
       }
     },
-
+    {
+      "id": "brief",
+      "title": "Der Brief",
+      "label": "FREI",
+      "type": "intro",
+      "audio": "akte001/audio/brief.mp3",
+      "text": "akte001/texte/brief.html",
+      "code": null,
+      "map": {
+        "visible": false,
+        "coordinates": null
+      }
+    },
     {
       "id": "kapitel01",
       "title": "Die erste Spur",
       "label": "FELDCODE",
       "type": "station",
-
       "audio": "akte001/audio/kapitel01.mp3",
       "text": "akte001/texte/kapitel01.html",
-
       "code": "ALPHA7624",
-
       "map": {
-  "visible": "always",
-  "requiresLocation": true,
-  "unlockRadius": 25,
-  "requiresCode": true,
-  "coordinates": {
-    "lat": "N47° 29.907",
-    "lng": "E009° 01.356"
-  }
-}
+        "visible": "always",
+        "requiresLocation": true,
+        "unlockRadius": 25,
+        "requiresCode": true,
+        "coordinates": {
+          "lat": "N47° 29.907",
+          "lng": "E009° 01.356"
+        }
+      }
     },
-
     {
       "id": "station02",
       "title": "Die Prüfung",
       "label": "FELDCODE",
       "type": "station",
-
       "audio": "akte001/audio/station02.mp3",
       "text": "akte001/texte/station02.html",
-
       "code": "BETA3816",
-
       "map": {
-  "visible": "after_unlock",
-  "requiresLocation": true,
-  "unlockRadius": 25,
-  "requiresCode": true,
-  "coordinates": {
-    "lat": "N47° 29.899",
-    "lng": "E009° 01.302"
-  }
-}
+        "visible": "after_unlock",
+        "requiresLocation": true,
+        "unlockRadius": 25,
+        "requiresCode": true,
+        "coordinates": {
+          "lat": "N47° 29.899",
+          "lng": "E009° 01.302"
+        }
+      }
     },
-
     {
-  "id": "pforten",
-  "title": "Die fünf Pforten",
-  "label": "RÄTSEL",
-  "type": "puzzle",
-
-  "audio": "akte001/audio/pforten.mp3",
-  "text": "akte001/texte/pforten.html",
-
-  "code": null,
-  "unlockAfterInteraction": "station02",
-
-  "map": {
-    "visible": false,
-    "coordinates": null
-  }
-},
-
+      "id": "pforten",
+      "title": "Die fünf Pforten",
+      "label": "RÄTSEL",
+      "type": "puzzle",
+      "audio": "akte001/audio/pforten.mp3",
+      "text": "akte001/texte/pforten.html",
+      "code": null,
+      "unlockAfterInteraction": "station02",
+      "map": {
+        "visible": false,
+        "coordinates": null
+      }
+    },
     {
       "id": "signal",
       "title": "Das Signal",
       "label": "FELDCODE",
       "type": "station",
-
       "audio": "akte001/audio/signal.mp3",
       "text": "akte001/texte/signal.html",
-
       "code": "DELTA5179",
-
       "map": {
-  "visible": "after_unlock",
-  "requiresLocation": true,
-  "unlockRadius": 25,
-  "requiresCode": true,
-  "coordinates": {
-    "lat": "N47° 30.061",
-    "lng": "E009° 01.102"
-  }
-}
+        "visible": "after_unlock",
+        "requiresLocation": true,
+        "unlockRadius": 25,
+        "requiresCode": true,
+        "coordinates": {
+          "lat": "N47° 30.061",
+          "lng": "E009° 01.102"
+        }
+      }
     },
-
     {
       "id": "maschine",
       "title": "Das Herz der Maschine",
       "label": "FELDCODE",
       "type": "station",
-
       "audio": "akte001/audio/maschine.mp3",
       "text": "akte001/texte/maschine.html",
-
       "code": "OMEGA2026",
-
       "map": {
-  "visible": false,
-  "coordinates": null
-}
+        "visible": false,
+        "coordinates": null
+      }
     },
     {
-  "id": "letztesprotokoll",
-  "title": "Das letzte Protokoll",
-  "label": "FELDCODE",
-  "type": "audio",
-
-  "audio": "akte001/audio/letztesprotokoll.mp3",
-  "text": "akte001/texte/letztesprotokoll.html",
-
-  "code": "SIGMA0001",
-
-  "map": {
-    "visible": false,
-    "coordinates": null
-  }
-},
-
+      "id": "letztesprotokoll",
+      "title": "Das letzte Protokoll",
+      "label": "FELDCODE",
+      "type": "audio",
+      "audio": "akte001/audio/letztesprotokoll.mp3",
+      "text": "akte001/texte/letztesprotokoll.html",
+      "code": "SIGMA0001",
+      "map": {
+        "visible": false,
+        "coordinates": null
+      }
+    },
     {
       "id": "epilog",
       "title": "Epilog",
       "label": "FINAL",
       "type": "final",
-
       "audio": "akte001/audio/epilog.mp3",
       "text": "akte001/texte/epilog.html",
-
       "code": "ARKANUS",
-
       "map": {
-  "visible": false,
-  "coordinates": null
-}
+        "visible": false,
+        "coordinates": null
+      }
     }
-
   ]
 }
