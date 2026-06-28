@@ -199,6 +199,18 @@ renderDocuments(){
     </article>
 
     ${this.activeFall ? `
+    ${typeof Completion !== "undefined" && Completion.isFallCompleted(this.activeFall) ? `
+  <article class="document-card completion-card">
+    <span class="badge active">AKTE ABGESCHLOSSEN</span>
+    <h2>${this.activeFall.title}</h2>
+    <p class="meta">${this.activeFall.internalId} // ERMITTLUNG ERFOLGREICH BEENDET</p>
+    <p>Alle Sequenzen wurden freigegeben. Die Ermittlungsakte wurde vollständig synchronisiert.</p>
+
+    <div class="completion-stamp">
+      ✓ ARKANUS FREIGABE ERTEILT
+    </div>
+  </article>
+` : ""}
       <article class="document-card">
         <span class="badge active">AKTIVE ERMITTLUNGSAKTE</span>
         <h2>${this.activeFall.title}</h2>
