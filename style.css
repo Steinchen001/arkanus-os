@@ -1026,3 +1026,19 @@ box-shadow:0 0 8px #00ffd0;
 .achievement-panel li:last-child{
   border-bottom:none;
 }
+.completion-card{
+  border-color:var(--gold);
+  box-shadow:0 0 24px rgba(255,176,0,.18);
+}
+
+.completion-stamp{
+  margin-top:16px;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+  font-family:monospace;
+  letter-spacing:2px;
+  box-shadow:0 0 18px rgba(255,176,0,.18);
+}
