@@ -24,16 +24,24 @@ this.boot();
     const profile = Profile.current;
     const lastFall = Storage.getLastFall();
 
-    const lines = [
-      "> ARKANUS ENGINE v2.0.0 wird gestartet …",
-      "> Forschungssystem initialisiert",
-      "> Archivdatenbank verbunden",
-      "> Akten geladen: " + Loader.getCases().length,
-      profile ? "> Ermittlerprofil erkannt: " + profile.name : "> Kein Ermittlerprofil gefunden",
-      lastFall ? "> Letzte Akte: " + lastFall : "> Keine letzte Akte gefunden",
-      "> Zugriffsstufe: BESUCHER",
-      "> System bereit █"
-    ];
+    const version =
+  typeof Version !== "undefined"
+    ? Version.getLabel()
+    : "Version unbekannt";
+
+const lines = [
+  "> ARKANUS OS wird gestartet …",
+  "> Sichere Verbindung hergestellt",
+  "> Domain: arkanus.ch",
+  "> PWA-Modus aktiviert",
+  "> Offline-Cache geprüft",
+  "> " + version,
+  "> Akten geladen: " + Loader.getCases().length,
+  profile ? "> Ermittlerprofil erkannt: " + profile.name : "> Kein Ermittlerprofil gefunden",
+  lastFall ? "> Letzte Akte: " + lastFall : "> Keine letzte Akte gefunden",
+  "> Zugriffsstufe: BESUCHER",
+  "> System bereit █"
+];
 
     let line = 0;
     let char = 0;
