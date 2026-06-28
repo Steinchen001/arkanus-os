@@ -29,7 +29,7 @@ const Player = {
       &gt; ${fall.title} geladen<br>
       &gt; Ermittler: ${Profile.getName()}<br>
       &gt; Audioprotokolle gefunden: ${fall.chapters.length}<br>
-      &gt; Freigeschaltet: ${progress.unlocked} / ${progress.total}<br>
+      &gt; Zugriffsebene: ${progress.unlocked} / ${progress.total} Sequenzen verfügbar<br>
       &gt; Fortschritt wird lokal auf diesem Gerät gespeichert<br><br>
       ${this.renderProgressList(fall)}
     `;
