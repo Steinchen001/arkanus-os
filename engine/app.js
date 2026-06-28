@@ -92,9 +92,15 @@ const lines = [
   },
 
   afterBoot(){
-    Profile.updateBadge();
-    Archive.renderCases();
-    Archive.renderDocuments();
-    Archive.openFromUrl();
+  Profile.updateBadge();
+
+  const version = document.getElementById("app-version");
+  if(version && typeof Version !== "undefined"){
+    version.innerText = "ARKANUS ENGINE // " + Version.getLabel();
   }
+
+  Archive.renderCases();
+  Archive.renderDocuments();
+  Archive.openFromUrl();
+}
 };
