@@ -223,12 +223,11 @@ const Player = {
 ]);
 
       setTimeout(() => {
-        Decrypt.hide();
-        this.render(fall);
-        Archive.renderCases();
-        Archive.renderDocuments();
-        Profile.updateBadge();
-      }, 2200);
+  this.render(fall);
+  Archive.renderCases();
+  Archive.renderDocuments();
+  Profile.updateBadge();
+}, 2300);
     }
   },
 
