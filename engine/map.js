@@ -313,10 +313,14 @@ const MapSystem = {
 
       Storage.setLocationReached(this.activeFall.id, nearest.id);
 
-      Player.render(this.activeFall);
-      Archive.renderDocuments();
+Player.render(this.activeFall);
+Archive.renderDocuments();
 
-      return;
+if(typeof Mission !== "undefined"){
+  Mission.updateHud(this.activeFall);
+}
+
+return;
     }
 
     gpsStatus.innerText =
