@@ -41,7 +41,7 @@
 
       "map": {
   "visible": "always",
-  "requiresLocation": true,
+  "requiresLocation": false,
   "unlockRadius": 25,
   "requiresCode": false,
   "coordinates": {
