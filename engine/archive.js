@@ -102,6 +102,7 @@ const Archive = {
       Storage.log("Archivakte geöffnet: " + this.activeFall.title);
 
       Player.render(this.activeFall);
+      Mission.updateHud(this.activeFall);
 this.renderDocuments();
 
 const mapContainer = document.getElementById("map-container");
