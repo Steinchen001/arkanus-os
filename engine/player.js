@@ -38,17 +38,32 @@ const Player = {
     fall.chapters.forEach((chapter, index) => {
       const isUnlocked = !chapter.code || Storage.isUnlocked(fall.id, chapter.id);
 
+      const requiresLocation =
+        chapter.map &&
+        chapter.map.requiresLocation === true;
+
+      const locationReached =
+        !requiresLocation ||
+        Storage.isLocationReached(fall.id, chapter.id);
+
+      const canEnterCode = locationReached;
+
       const station = document.createElement("article");
       station.className = "station" + (isUnlocked ? "" : " locked");
 
       station.innerHTML = `
-        <span class="badge ${isUnlocked ? "active" : "danger"}">
-          ${isUnlocked ? "FREIGEGEBEN" : chapter.label}
+        <span class="badge ${isUnlocked ? "active" : locationReached ? "active" : "danger"}">
+          ${isUnlocked ? "FREIGEGEBEN" : locationReached ? chapter.label : "POSITION FEHLT"}
         </span>
 
         <h2>${String(index + 1).padStart(2, "0")} // ${chapter.title}</h2>
 
-        ${chapter.code && !isUnlocked ? `
+        ${requiresLocation && !locationReached && !isUnlocked ? `
+          <p>📍 Position noch nicht bestätigt.</p>
+          <p class="meta">Begib dich zur markierten Station und aktiviere GPS.</p>
+        ` : ""}
+
+        ${chapter.code && !isUnlocked && canEnterCode ? `
           <p>Archivschlüssel erforderlich.</p>
           <input placeholder="Feldcode eingeben">
           <button class="primary-btn">Freischalten</button>
@@ -69,7 +84,7 @@ const Player = {
         </div>
       `;
 
-      if(chapter.code && !isUnlocked){
+      if(chapter.code && !isUnlocked && canEnterCode){
         this.bindUnlock(station, fall, chapter);
       }
 
