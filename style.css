@@ -928,3 +928,71 @@ box-shadow:0 0 8px #00ffd0;
   border-radius:10px;
   padding:8px 10px;
 }
+.arkanus-profile-card{
+  border-color:rgba(0,255,208,.55);
+  box-shadow:0 0 24px rgba(0,255,208,.12);
+}
+
+.profile-header{
+  display:grid;
+  grid-template-columns:1fr 230px;
+  gap:18px;
+  align-items:start;
+}
+
+.agent-id-card{
+  background:
+    radial-gradient(circle at top,rgba(0,255,208,.18),transparent 45%),
+    linear-gradient(180deg,#071113,#020404);
+  border:1px solid var(--cyan);
+  border-radius:16px;
+  padding:14px;
+  text-align:center;
+  box-shadow:0 0 18px rgba(0,255,208,.25);
+  font-family:monospace;
+}
+
+.agent-id-title{
+  color:var(--cyan);
+  letter-spacing:3px;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.agent-avatar{
+  width:74px;
+  height:74px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  border:1px solid var(--cyan);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--cyan);
+  font-size:34px;
+  box-shadow:0 0 18px rgba(0,255,208,.35);
+}
+
+.agent-name{
+  color:var(--text);
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.agent-rank{
+  color:var(--gold);
+  margin-top:6px;
+  font-size:13px;
+}
+
+.agent-number{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:12px;
+}
+
+@media(max-width:800px){
+  .profile-header{
+    grid-template-columns:1fr;
+  }
+}
