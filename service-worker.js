@@ -23,6 +23,7 @@ const FILES_TO_CACHE = [
   "/engine/logbook.js",
   "/engine/map.js",
   "/engine/progress.js",
+  "/engine/mission.js",
   "/engine/ui.js",
   "/engine/player.js",
   "/engine/archive.js",
