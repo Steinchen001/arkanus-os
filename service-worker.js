@@ -24,8 +24,9 @@ const FILES_TO_CACHE = [
   "/engine/ui.js",
   "/engine/player.js",
   "/engine/archive.js",
-  "/engine/dev.js",
-  "/engine/app.js",
+"/engine/dev.js",
+"/engine/update.js",
+"/engine/app.js",
 
   "/data/cases.json",
   "/data/settings.json",
