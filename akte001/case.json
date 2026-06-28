@@ -80,12 +80,15 @@
       "code": "ALPHA7624",
 
       "map": {
-        "visible": "after_unlock",
-        "coordinates": {
-          "lat": "N47° 28.300",
-          "lng": "E009° 28.300"
-        }
-      }
+  "visible": "after_unlock",
+  "requiresLocation": true,
+  "unlockRadius": 25,
+  "requiresCode": true,
+  "coordinates": {
+    "lat": "N47° 29.907",
+    "lng": "E009° 01.356"
+  }
+}
     },
 
     {
@@ -100,12 +103,15 @@
       "code": "BETA3816",
 
       "map": {
-        "visible": "after_unlock",
-        "coordinates": {
-          "lat": "N47° 28.450",
-          "lng": "E009° 28.550"
-        }
-      }
+  "visible": "after_unlock",
+  "requiresLocation": true,
+  "unlockRadius": 25,
+  "requiresCode": true,
+  "coordinates": {
+    "lat": "N47° 29.899",
+    "lng": "E009° 01.302"
+  }
+}
     },
 
     {
@@ -137,12 +143,15 @@
       "code": "DELTA5179",
 
       "map": {
-        "visible": "after_unlock",
-        "coordinates": {
-          "lat": "N47° 28.720",
-          "lng": "E009° 28.840"
-        }
-      }
+  "visible": "after_unlock",
+  "requiresLocation": true,
+  "unlockRadius": 25,
+  "requiresCode": true,
+  "coordinates": {
+    "lat": "N47° 30.061",
+    "lng": "E009° 01.102"
+  }
+}
     },
 
     {
