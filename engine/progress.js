@@ -8,14 +8,11 @@ const Progress = {
       };
     }
 
-    let total = fall.chapters.length;
-    let unlocked = 0;
+    const total = fall.chapters.length;
 
-    fall.chapters.forEach(chapter => {
-      if(!chapter.code || Storage.isUnlocked(fall.id, chapter.id)){
-        unlocked++;
-      }
-    });
+    const unlocked = fall.chapters.filter(chapter =>
+      Storage.canAccessChapter(fall, chapter)
+    ).length;
 
     const percent = total > 0
       ? Math.min(100, Math.round((unlocked / total) * 100))
