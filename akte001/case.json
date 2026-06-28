@@ -160,12 +160,9 @@
       "code": "OMEGA2026",
 
       "map": {
-        "visible": "after_unlock",
-        "coordinates": {
-          "lat": "N47° 28.950",
-          "lng": "E009° 29.120"
-        }
-      }
+  "visible": false,
+  "coordinates": null
+}
     },
 
     {
@@ -180,12 +177,9 @@
       "code": "ARKANUS",
 
       "map": {
-        "visible": "after_unlock",
-        "coordinates": {
-          "lat": "N47° 29.150",
-          "lng": "E009° 29.350"
-        }
-      }
+  "visible": false,
+  "coordinates": null
+}
     }
 
   ]
