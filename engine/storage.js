@@ -202,4 +202,19 @@ const Storage = {
       percent
     };
   }
+    resetFall(fallId){
+    const keysToDelete = [];
+
+    for(let i = 0; i < localStorage.length; i++){
+      const key = localStorage.key(i);
+
+      if(key && key.startsWith(this.prefix + fallId + "_")){
+        keysToDelete.push(key);
+      }
+    }
+
+    keysToDelete.forEach(key => localStorage.removeItem(key));
+
+    this.log("Lokaler Testfortschritt zurückgesetzt: " + fallId);
+  }
 };
