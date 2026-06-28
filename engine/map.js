@@ -295,7 +295,8 @@ if(nearest.requiresLocation && nearestDistance <= nearest.unlockRadius){
         `📍 Station erreicht ✔ // ${nearest.requiresCode ? "Schlüssel erforderlich" : "Kein Schlüssel nötig"}`;
 
     Storage.setLocationReached(this.activeFall.id, nearest.id);
-
+Player.render(this.activeFall);
+Archive.renderDocuments();
 }else{
 
     gpsStatus.innerText =
