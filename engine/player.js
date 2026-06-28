@@ -178,6 +178,9 @@ const Player = {
           Archive.renderCases();
           Archive.renderDocuments();
           Profile.updateBadge();
+          if(typeof Completion !== "undefined"){
+  Completion.show(fall);
+}
         }, 2400);
       }else{
         message.innerText = "Zugriff verweigert. Feldcode prüfen.";
