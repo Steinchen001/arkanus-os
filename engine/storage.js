@@ -201,7 +201,8 @@ const Storage = {
       total: totalChapters,
       percent
     };
-  }
+  },
+  
     resetFall(fallId){
     const keysToDelete = [];
 
