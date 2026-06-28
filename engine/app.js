@@ -102,5 +102,9 @@ const lines = [
   Archive.renderCases();
   Archive.renderDocuments();
   Archive.openFromUrl();
+
+  setTimeout(() => {
+    Profile.updateBadge();
+  }, 500);
 }
 };
