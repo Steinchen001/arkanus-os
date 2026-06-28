@@ -30,7 +30,7 @@ const Mission = {
     }
 
     return "AKTIVE MISSION: " + chapter.title;
-  }
+  },
     updateHud(fall){
     const hud = document.getElementById("mission-hud");
     const title = document.getElementById("mission-hud-title");
