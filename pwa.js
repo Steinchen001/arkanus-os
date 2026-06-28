@@ -5,7 +5,8 @@ window.addEventListener("beforeinstallprompt", event => {
   deferredInstallPrompt = event;
 
   const banner = document.getElementById("install-banner");
-  if(banner){
+
+  if(banner && !localStorage.getItem("arkanus_install_banner_closed")){
     banner.classList.remove("hidden");
   }
 });
@@ -33,6 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if(closeBtn && banner){
     closeBtn.addEventListener("click", () => {
       banner.classList.add("hidden");
+      localStorage.setItem("arkanus_install_banner_closed", "true");
     });
   }
+
+  window.addEventListener("appinstalled", () => {
+    if(banner){
+      banner.classList.add("hidden");
+    }
+
+    localStorage.setItem("arkanus_app_installed", "true");
+  });
 });
