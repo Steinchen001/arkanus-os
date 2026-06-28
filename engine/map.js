@@ -318,13 +318,19 @@ getVisiblePoints(fall){
         const parsed = this.parseGeoCoordinates(coords.lat, coords.lng);
 
         return {
-          id: chapter.id,
-          title: chapter.title,
-          lat: parsed.lat,
-          lng: parsed.lng,
-          rawLat: coords.lat,
-          rawLng: coords.lng
-        };
+    id: chapter.id,
+    title: chapter.title,
+
+    lat: parsed.lat,
+    lng: parsed.lng,
+
+    rawLat: coords.lat,
+    rawLng: coords.lng,
+
+    unlockRadius: chapter.map.unlockRadius || 25,
+    requiresLocation: chapter.map.requiresLocation || false,
+    requiresCode: chapter.map.requiresCode || false
+};
       })
       .filter(point => point.lat !== null && point.lng !== null);
   },
