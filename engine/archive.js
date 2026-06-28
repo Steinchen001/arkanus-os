@@ -189,7 +189,7 @@ if(mapContainer){
 
           <ul class="mission-list">
             ${this.activeFall.chapters.map(chapter => {
-              const unlocked = !chapter.code || Storage.isUnlocked(this.activeFall.id, chapter.id);
+              const unlocked = Storage.canAccessChapter(this.activeFall, chapter);
               return `
                 <li class="${unlocked ? "done" : "locked"}">
                   <span>${unlocked ? "✓" : "🔒"}</span>
