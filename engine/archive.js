@@ -259,7 +259,7 @@ renderDocuments(){
       Profile.showEdit();
     };
   }
-}
+},
 
   openFromUrl(){
     const params = new URLSearchParams(window.location.search);
