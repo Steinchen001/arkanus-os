@@ -1262,3 +1262,69 @@ box-shadow:0 0 8px #00ffd0;
     text-shadow:0 0 14px var(--cyan);
   }
 }
+/* ===========================
+   FALLAKTEN 2.0
+=========================== */
+
+.case-card{
+  position:relative;
+  border-color:rgba(0,255,208,.24);
+  box-shadow:0 0 18px rgba(0,255,208,.08);
+  transition:.25s;
+}
+
+.case-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 28px rgba(0,255,208,.18);
+}
+
+.case-card::after{
+  content:"ARKANUS FILE";
+  position:absolute;
+  top:12px;
+  right:12px;
+  color:rgba(0,255,208,.55);
+  font-family:monospace;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.case-card.locked::after{
+  content:"CLASSIFIED";
+  color:rgba(255,68,68,.55);
+}
+
+.case-body{
+  position:relative;
+}
+
+.case-body h2{
+  font-size:22px;
+  line-height:1.25;
+}
+
+.case-body::before{
+  content:"";
+  display:block;
+  width:54px;
+  height:3px;
+  background:var(--cyan);
+  box-shadow:0 0 12px var(--cyan);
+  margin-bottom:14px;
+}
+
+.case-card.locked .case-body::before{
+  background:var(--red);
+  box-shadow:0 0 12px var(--red);
+}
+
+.case-body .meta{
+  background:rgba(0,0,0,.18);
+  border-left:2px solid rgba(255,176,0,.55);
+  padding:7px 10px;
+  border-radius:8px;
+}
+
+.case-card .primary-btn{
+  margin-top:14px;
+}
