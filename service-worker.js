@@ -1,4 +1,4 @@
-const CACHE_NAME = "arkanus-os-v3";
+const CACHE_NAME = "arkanus-os-v4";
 
 const FILES_TO_CACHE = [
   "/",
@@ -58,13 +58,21 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
   if(event.request.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if(cached) return cached;
+  if(url.hostname.includes("tile.openstreetmap.org")){
+    return;
+  }
 
-      return fetch(event.request).then(response => {
+  if(url.hostname.includes("unpkg.com")){
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
         const copy = response.clone();
 
         caches.open(CACHE_NAME).then(cache => {
@@ -72,9 +80,11 @@ self.addEventListener("fetch", event => {
         });
 
         return response;
-      }).catch(() => {
-        return caches.match("/index.html");
-      });
-    })
+      })
+      .catch(() => {
+        return caches.match(event.request).then(cached => {
+          return cached || caches.match("/index.html");
+        });
+      })
   );
 });
