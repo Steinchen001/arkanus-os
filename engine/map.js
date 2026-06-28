@@ -46,16 +46,18 @@ lastPlayerPosition: null,
 <div id="leaflet-map"></div>
 
         <ul class="mission-list map-station-list">
-          ${fall.chapters.map(chapter => {
-            const visible = this.isChapterVisibleOnMap(fall, chapter);
+          ${fall.chapters
+  .filter(chapter => chapter.map && chapter.map.coordinates)
+  .map(chapter => {
+    const visible = this.isChapterVisibleOnMap(fall, chapter);
 
-            return `
-              <li class="${visible ? "done" : "locked"}">
-                <span>${visible ? "🟢" : "🔒"}</span>
-                ${visible ? chapter.title : "Verschlüsselte Position"}
-              </li>
-            `;
-          }).join("")}
+    return `
+      <li class="${visible ? "done" : "locked"}">
+        <span>${visible ? "🟢" : "🔒"}</span>
+        ${visible ? chapter.title : "Verschlüsselte Position"}
+      </li>
+    `;
+  }).join("")}
         </ul>
       </article>
     `;
