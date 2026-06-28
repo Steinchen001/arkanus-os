@@ -112,111 +112,129 @@ if(mapContainer){
     }
   },
 
-  renderDocuments(){
-    if(!this.elements.documentsList){
-      this.elements.documentsList = document.getElementById("documents-list");
-    }
+renderDocuments(){
+  if(!this.elements.documentsList){
+    this.elements.documentsList = document.getElementById("documents-list");
+  }
 
-    if(!this.elements.documentsList) return;
+  if(!this.elements.documentsList) return;
 
-    const logs = Storage.getLogs(30);
-    const lastFall = Storage.getLastFall();
-    const lastVisit = Storage.getLastVisit();
+  const logs = Storage.getLogs(30);
+  const lastFall = Storage.getLastFall();
+  const lastVisit = Storage.getLastVisit();
 
-    const unlockedTotal = Storage.countUnlocked();
-    const clearance = Profile.getClearance();
-    const trust = Profile.getTrustPercent();
+  const stats = Stats.getProfileStats();
+  const profileName = Profile.getName();
+  const serviceNumber = Profile.getServiceNumber();
 
-    let activeProgress = null;
+  let activeProgress = null;
 
-    if(this.activeFall){
-      activeProgress = Progress.getFallProgress(this.activeFall);
-    }
+  if(this.activeFall){
+    activeProgress = Progress.getFallProgress(this.activeFall);
+  }
 
-    const lastVisitText = lastVisit
-      ? new Date(lastVisit).toLocaleString("de-CH", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
-        })
-      : "Keine Daten";
+  const lastVisitText = lastVisit
+    ? new Date(lastVisit).toLocaleString("de-CH", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      })
+    : "Keine Daten";
 
-    this.elements.documentsList.innerHTML = `
-      <article class="investigator-card">
-        <span class="badge active">ERMITTLERAKTE</span>
-        <h2>${Profile.getName()}</h2>
-
-<button id="edit-profile-btn" class="secondary-btn">
-    🖊 Profil bearbeiten
-</button>
-
-        <div class="profile-grid">
-          <div class="profile-field"><span>Name</span><strong>${Profile.getName()}</strong></div>
-          <div class="profile-field"><span>Dienstnummer</span><strong>${Profile.getServiceNumber()}</strong></div>
-          <div class="profile-field"><span>Rang</span><strong>${clearance}</strong></div>
-          <div class="profile-field"><span>Dienstbeginn</span><strong>${Profile.getCreatedDate()}</strong></div>
-          <div class="profile-field"><span>Aktive Akte</span><strong>${this.activeFall ? this.activeFall.title : "Keine Akte geladen"}</strong></div>
-          <div class="profile-field"><span>Letzter Zugriff</span><strong>${lastVisitText}</strong></div>
-          <div class="profile-field"><span>Entschlüsselte Protokolle</span><strong>${unlockedTotal}</strong></div>
-          <div class="profile-field"><span>Letzte Akte</span><strong>${lastFall || "Keine"}</strong></div>
+  this.elements.documentsList.innerHTML = `
+    <article class="investigator-card arkanus-profile-card">
+      <div class="profile-header">
+        <div>
+          <span class="badge active">ERMITTLERAKTE</span>
+          <h2>${profileName}</h2>
+          <p class="meta">ARKANUS RESEARCH NETWORK // PERSONALDOSSIER</p>
         </div>
 
+        <div class="agent-id-card">
+          <div class="agent-id-title">ARKANUS</div>
+          <div class="agent-avatar">◆</div>
+          <div class="agent-name">${profileName}</div>
+          <div class="agent-rank">${stats.rank}</div>
+          <div class="agent-number">ID: ${serviceNumber}</div>
+        </div>
+      </div>
+
+      <button id="edit-profile-btn" class="secondary-btn">
+        🖊 Profil bearbeiten
+      </button>
+
+      <div class="profile-grid">
+        <div class="profile-field"><span>Name</span><strong>${profileName}</strong></div>
+        <div class="profile-field"><span>Dienstnummer</span><strong>${serviceNumber}</strong></div>
+        <div class="profile-field"><span>Dienstgrad</span><strong>${stats.rank}</strong></div>
+        <div class="profile-field"><span>Level</span><strong>${stats.level}</strong></div>
+        <div class="profile-field"><span>XP</span><strong>${stats.xp}</strong></div>
+        <div class="profile-field"><span>Erfolge</span><strong>${stats.achievements}</strong></div>
+        <div class="profile-field"><span>Freigegebene Sequenzen</span><strong>${stats.unlocked}</strong></div>
+        <div class="profile-field"><span>Systemereignisse</span><strong>${stats.logs}</strong></div>
+        <div class="profile-field"><span>Letzte Akte</span><strong>${lastFall || "Keine"}</strong></div>
+        <div class="profile-field"><span>Letzter Zugriff</span><strong>${lastVisitText}</strong></div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">DIENSTGRAD-FORTSCHRITT</div>
+        <div class="progress-bar">
+          <span style="width:${Math.min(100, (stats.xp % 250) / 250 * 100)}%"></span>
+        </div>
+      </div>
+    </article>
+
+    ${this.activeFall ? `
+      <article class="document-card">
+        <span class="badge active">AKTIVE ERMITTLUNGSAKTE</span>
+        <h2>${this.activeFall.title}</h2>
+        <p>${this.activeFall.intro}</p>
+        <p class="meta">${this.activeFall.internalId || this.activeFall.id} // ${this.activeFall.gcCode || "GC folgt"}</p>
+        <p class="meta">${this.activeFall.type} // ${this.activeFall.location}</p>
+
         <div class="progress-wrap">
-          <div class="progress-label">VERTRAUENSSTUFE ${trust}%</div>
-          <div class="progress-bar"><span style="width:${trust}%"></span></div>
+          <div class="progress-label">AKTENFORTSCHRITT ${activeProgress.percent}%</div>
+          <div class="progress-bar"><span style="width:${activeProgress.percent}%"></span></div>
         </div>
       </article>
 
-      ${this.activeFall ? `
-        <article class="document-card">
-          <span class="badge active">AKTIVE ERMITTLUNGSAKTE</span>
-          <h2>${this.activeFall.title}</h2>
-          <p>${this.activeFall.intro}</p>
-          <p class="meta">${this.activeFall.internalId || this.activeFall.id} // ${this.activeFall.gcCode || "GC folgt"}</p>
-          <p class="meta">${this.activeFall.type} // ${this.activeFall.location}</p>
+      <article class="document-card">
+        <span class="badge active">MISSIONSFORTSCHRITT</span>
+        <h2>Freigegebene Sequenzen</h2>
 
-          <div class="progress-wrap">
-            <div class="progress-label">AKTENFORTSCHRITT ${activeProgress.percent}%</div>
-            <div class="progress-bar"><span style="width:${activeProgress.percent}%"></span></div>
-          </div>
-        </article>
+        <ul class="mission-list">
+          ${this.activeFall.chapters.map(chapter => {
+            const unlocked = Storage.canAccessChapter(this.activeFall, chapter);
+            return `
+              <li class="${unlocked ? "done" : "locked"}">
+                <span>${unlocked ? "✓" : "🔒"}</span>
+                ${chapter.title}
+              </li>
+            `;
+          }).join("")}
+        </ul>
+      </article>
+    ` : `
+      <article class="document-card">
+        <span class="badge danger">KEINE AKTE GELADEN</span>
+        <h2>Keine Ermittlungsakte aktiv</h2>
+        <p>Öffne zuerst eine Akte im Archiv.</p>
+      </article>
+    `}
 
-        <article class="document-card">
-          <span class="badge active">MISSIONSFORTSCHRITT</span>
-          <h2>Freigegebene Stationen</h2>
+    ${Logbook.render(logs)}
+  `;
 
-          <ul class="mission-list">
-            ${this.activeFall.chapters.map(chapter => {
-              const unlocked = Storage.canAccessChapter(this.activeFall, chapter);
-              return `
-                <li class="${unlocked ? "done" : "locked"}">
-                  <span>${unlocked ? "✓" : "🔒"}</span>
-                  ${chapter.title}
-                </li>
-              `;
-            }).join("")}
-          </ul>
-        </article>
-      ` : `
-        <article class="document-card">
-          <span class="badge danger">KEINE AKTE GELADEN</span>
-          <h2>Keine Ermittlungsakte aktiv</h2>
-          <p>Öffne zuerst eine Akte im Archiv.</p>
-        </article>
-      `}
+  const editBtn = document.getElementById("edit-profile-btn");
 
-      ${Logbook.render(logs)}
-    `;
-        const editBtn = document.getElementById("edit-profile-btn");
-
-    if(editBtn){
-      editBtn.onclick = () => {
-        Profile.showEdit();
-      };
-    }
-  },
+  if(editBtn){
+    editBtn.onclick = () => {
+      Profile.showEdit();
+    };
+  }
+}
 
   openFromUrl(){
     const params = new URLSearchParams(window.location.search);
