@@ -36,23 +36,19 @@ const Player = {
     this.elements.audioList.innerHTML = "";
 
     fall.chapters.forEach((chapter, index) => {
-      const isAutoLocked =
-        chapter.unlockAfterInteraction &&
-        !Storage.isUnlocked(fall.id, chapter.id);
+      const status = Storage.getChapterStatus(fall, chapter);
+const isUnlocked = status === "unlocked";
+const canEnterCode = Storage.canEnterCode(fall, chapter);
 
-      const isUnlocked =
-        (!chapter.code && !isAutoLocked) ||
-        Storage.isUnlocked(fall.id, chapter.id);
+const requiresLocation =
+  chapter.map &&
+  chapter.map.requiresLocation === true;
 
-      const requiresLocation =
-        chapter.map &&
-        chapter.map.requiresLocation === true;
+const locationReached =
+  !requiresLocation ||
+  Storage.isLocationReached(fall.id, chapter.id);
 
-      const locationReached =
-        !requiresLocation ||
-        Storage.isLocationReached(fall.id, chapter.id);
-
-      const canEnterCode = locationReached;
+const isAutoLocked = status === "waiting";
 
       const station = document.createElement("article");
       station.className = "station" + (isUnlocked ? "" : " locked");
