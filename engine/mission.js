@@ -31,4 +31,18 @@ const Mission = {
 
     return "AKTIVE MISSION: " + chapter.title;
   }
+    updateHud(fall){
+    const hud = document.getElementById("mission-hud");
+    const title = document.getElementById("mission-hud-title");
+
+    if(!hud || !title) return;
+
+    if(!fall){
+      hud.classList.add("hidden");
+      return;
+    }
+
+    title.innerText = this.getStatusText(fall);
+    hud.classList.remove("hidden");
+  }
 };
