@@ -39,7 +39,13 @@ const Storage = {
   isUnlocked(fallId, chapterId){
     return localStorage.getItem(this.key(fallId, chapterId)) === "true";
   },
+  setLocationReached(fallId, chapterId){
+    localStorage.setItem(this.key(fallId, chapterId, "location"), "true");
+  },
 
+  isLocationReached(fallId, chapterId){
+    return localStorage.getItem(this.key(fallId, chapterId, "location")) === "true";
+  },
   markRead(fallId, chapterId){
     localStorage.setItem(this.key(fallId, chapterId, "read"), "true");
   },
