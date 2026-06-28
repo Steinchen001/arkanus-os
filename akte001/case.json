@@ -30,7 +30,7 @@
 
     {
       "id": "prolog",
-      "title": "Prolog – Der Anfang von allem",
+      "title": "Prolog",
       "label": "FREI",
       "type": "intro",
 
@@ -64,7 +64,7 @@
 
     {
       "id": "kapitel01",
-      "title": "Kapitel 1 – Die erste Spur",
+      "title": "Die erste Spur",
       "label": "FELDCODE",
       "type": "station",
 
@@ -87,7 +87,7 @@
 
     {
       "id": "station02",
-      "title": "Station 2 – Die fünf Pforten",
+      "title": "Die Entscheidung",
       "label": "FELDCODE",
       "type": "station",
 
@@ -110,7 +110,7 @@
 
     {
       "id": "pforten",
-      "title": "Audioprotokoll – Die fünf Pforten",
+      "title": "Die fünf Pforten",
       "label": "FELDCODE",
       "type": "audio",
 
@@ -127,7 +127,7 @@
 
     {
       "id": "signal",
-      "title": "Kapitel 3 – Das Signal",
+      "title": "Das Signal",
       "label": "FELDCODE",
       "type": "station",
 
@@ -150,7 +150,7 @@
 
     {
       "id": "maschine",
-      "title": "Kapitel 4 – Das Herz der Maschine",
+      "title": "Das Herz der Maschine",
       "label": "FELDCODE",
       "type": "station",
 
@@ -167,7 +167,7 @@
 
     {
       "id": "epilog",
-      "title": "Epilog – Nach dem Öffnen",
+      "title": "Epilog",
       "label": "FINAL",
       "type": "final",
 
