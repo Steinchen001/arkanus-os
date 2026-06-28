@@ -164,6 +164,22 @@
   "coordinates": null
 }
     },
+    {
+  "id": "letztesprotokoll",
+  "title": "Das letzte Protokoll",
+  "label": "FELDCODE",
+  "type": "audio",
+
+  "audio": "akte001/audio/letztesprotokoll.mp3",
+  "text": "akte001/texte/letztesprotokoll.html",
+
+  "code": "SIGMA0001",
+
+  "map": {
+    "visible": false,
+    "coordinates": null
+  }
+},
 
     {
       "id": "epilog",
