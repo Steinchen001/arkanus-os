@@ -54,6 +54,16 @@ const Archive = {
                 <span style="width:${progress.percent}%"></span>
               </div>
             </div>
+                  <div class="achievement-panel">
+        <h3>🏅 Auszeichnungen</h3>
+        ${
+          Stats.getAchievements().length
+            ? `<ul>
+                ${Stats.getAchievements().map(item => `<li>🏅 ${item}</li>`).join("")}
+              </ul>`
+            : `<p class="meta">Noch keine Auszeichnungen erhalten.</p>`
+        }
+      </div>
           ` : ""}
 
           <button class="primary-btn">
