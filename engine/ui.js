@@ -23,6 +23,7 @@ const UI = {
     this.views.forEach(view => view.classList.remove("active-view"));
 
     const selected = document.getElementById(viewName);
+
     if(selected){
       selected.classList.add("active-view");
     }
@@ -33,6 +34,14 @@ const UI = {
 
     if(this.windowTitle){
       this.windowTitle.innerText = this.titles[viewName] || "ARKANUS OS";
+    }
+
+    if(viewName === "map"){
+      setTimeout(() => {
+        if(typeof MapSystem !== "undefined" && MapSystem.map){
+          MapSystem.map.invalidateSize();
+        }
+      }, 300);
     }
   }
 };
