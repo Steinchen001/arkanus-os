@@ -304,7 +304,7 @@ const MapSystem = {
     if(!nearest) return;
     
 if(typeof Tracker !== "undefined"){
-  Tracker.update(nearestDistance);
+  Tracker.update(nearestDistance, nearest.title);
 }
 
     const distanceText = nearestDistance >= 1000
