@@ -141,6 +141,14 @@ terminal(){
   }
 },
 
+loadSetting(){
+  const saved = localStorage.getItem("arkanus_sound_enabled");
+
+  this.enabled = saved !== "false";
+
+  this.updateButton();
+},
+
   updateButton(){
     const btn = document.getElementById("sound-toggle-btn");
     if(!btn) return;
