@@ -1,4 +1,4 @@
-const CACHE_NAME = "arkanus-os-v45";
+const CACHE_NAME = "arkanus-os-v46";
 
 const FILES_TO_CACHE = [
   "/",
