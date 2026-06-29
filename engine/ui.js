@@ -35,7 +35,15 @@ const UI = {
     if(this.windowTitle){
       this.windowTitle.innerText = this.titles[viewName] || "ARKANUS OS";
     }
+if(viewName === "classified"){
+  if(typeof Sounds !== "undefined"){
+    Sounds.alarm();
+  }
 
+  if(typeof Notify !== "undefined"){
+    Notify.error("Zugriff auf klassifizierte Daten verweigert.");
+  }
+}
     if(viewName === "map"){
       setTimeout(() => {
         if(typeof MapSystem !== "undefined" && MapSystem.map){
