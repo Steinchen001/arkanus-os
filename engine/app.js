@@ -107,4 +107,11 @@ const lines = [
     Profile.updateBadge();
   }, 500);
 }
+document.querySelectorAll("button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if(typeof Sounds !== "undefined"){
+      Sounds.click();
+    }
+  });
+});
 };
