@@ -1592,3 +1592,16 @@ box-shadow:0 0 8px #00ffd0;
     opacity:1;
   }
 }
+
+/* ===========================
+   RADIO HINWEIS
+=========================== */
+
+.radio-hint{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:2px;
+  text-align:center;
+  opacity:.75;
+}
