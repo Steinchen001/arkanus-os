@@ -42,7 +42,15 @@ const Mission = {
       return;
     }
 
-    title.innerText = this.getStatusText(fall);
-    hud.classList.remove("hidden");
+    const newText = this.getStatusText(fall);
+
+if(title.innerText !== newText){
+  hud.classList.remove("flash");
+  void hud.offsetWidth;
+  hud.classList.add("flash");
+}
+
+title.innerText = newText;
+hud.classList.remove("hidden");
   }
 };
