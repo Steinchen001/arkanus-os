@@ -201,6 +201,9 @@ if(typeof Completion !== "undefined"){
         message.innerText = "Zugriff verweigert. Feldcode prüfen.";
         if(typeof Notify !== "undefined"){
   Notify.error("Zugriff verweigert. Feldcode prüfen.");
+  if(typeof Radio !== "undefined"){
+  Radio.denied();
+}
   if(typeof Sounds !== "undefined"){
   Sounds.error();
 }
