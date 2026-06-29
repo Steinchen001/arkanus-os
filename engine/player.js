@@ -196,6 +196,9 @@ if(typeof Completion !== "undefined"){
         message.innerText = "Zugriff verweigert. Feldcode prüfen.";
         if(typeof Notify !== "undefined"){
   Notify.error("Zugriff verweigert. Feldcode prüfen.");
+  if(typeof Sounds !== "undefined"){
+  Sounds.error();
+}
 }
         Storage.log("Ungültiger Archivschlüssel eingegeben.");
       }
@@ -226,6 +229,9 @@ if(typeof Completion !== "undefined"){
         Storage.log("Automatisch freigegeben: " + target.title);
         if(typeof Notify !== "undefined"){
   Notify.audio("Neue Sequenz freigegeben: " + target.title);
+  if(typeof Sounds !== "undefined"){
+  Sounds.unlock();
+}
 }
         unlockedSomething = true;
       }
