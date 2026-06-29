@@ -66,7 +66,12 @@ const Arkanus = {
 
       if(char < lines[line].length){
         this.bootText.innerHTML += lines[line].charAt(char);
-        char++;
+
+if(typeof Sounds !== "undefined" && char % 3 === 0){
+  Sounds.terminal();
+}
+
+char++;
         setTimeout(typeLine, 20);
       }else{
         this.bootText.innerHTML += "<br>";
@@ -75,7 +80,9 @@ const Arkanus = {
         setTimeout(typeLine, 150);
       }
     };
-
+if(typeof Sounds !== "undefined"){
+  Sounds.boot();
+}
     typeLine();
   },
 
