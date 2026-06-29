@@ -19,6 +19,10 @@ const Arkanus = {
     await Loader.init();
 
     Profile.load();
+    
+    if(typeof Director !== "undefined"){
+  Director.init();
+}
     UI.init();
     Player.init();
     Archive.init();
