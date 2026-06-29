@@ -44,7 +44,21 @@ const Sounds = {
   click(){
     this.play(620, 0.035, "square");
   },
+boot(){
+  this.play(260, 0.05, "square");
 
+  setTimeout(() => {
+    this.play(340, 0.05, "square");
+  }, 120);
+
+  setTimeout(() => {
+    this.play(520, 0.08, "triangle");
+  }, 260);
+},
+
+terminal(){
+  this.play(430, 0.018, "square");
+}
   success(){
     this.play(740, 0.08, "sine");
 
