@@ -171,7 +171,9 @@ const Player = {
           Storage.saveLastFall(fall.id);
           Storage.saveLastChapter(chapter.id);
           Storage.log("Archivschlüssel akzeptiert: " + chapter.title);
-
+if(typeof Notify !== "undefined"){
+  Notify.success("Feldcode akzeptiert: " + chapter.title);
+}
           Decrypt.hide();
 
           this.render(fall);
@@ -189,6 +191,9 @@ if(typeof Completion !== "undefined"){
         }, 2400);
       }else{
         message.innerText = "Zugriff verweigert. Feldcode prüfen.";
+        if(typeof Notify !== "undefined"){
+  Notify.error("Zugriff verweigert. Feldcode prüfen.");
+}
         Storage.log("Ungültiger Archivschlüssel eingegeben.");
       }
     });
@@ -216,6 +221,9 @@ if(typeof Completion !== "undefined"){
       if(!Storage.isUnlocked(fall.id, target.id)){
         Storage.unlock(fall.id, target.id);
         Storage.log("Automatisch freigegeben: " + target.title);
+        if(typeof Notify !== "undefined"){
+  Notify.audio("Neue Sequenz freigegeben: " + target.title);
+}
         unlockedSomething = true;
       }
     });
