@@ -1511,3 +1511,26 @@ box-shadow:0 0 8px #00ffd0;
     box-shadow:0 0 18px rgba(0,255,208,.12);
   }
 }
+/* ===========================
+   PROGRESS UPDATE EFFECT
+=========================== */
+
+.progress-bar.flash span{
+  animation:progressPulse .9s ease;
+}
+
+@keyframes progressPulse{
+  0%{
+    box-shadow:0 0 8px var(--cyan);
+  }
+
+  40%{
+    box-shadow:0 0 26px var(--gold);
+    background:var(--gold);
+  }
+
+  100%{
+    box-shadow:0 0 12px var(--cyan);
+    background:var(--cyan);
+  }
+}
