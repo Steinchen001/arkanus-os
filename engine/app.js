@@ -94,8 +94,22 @@ const Arkanus = {
   Sounds.loadSetting();
 
   const soundBtn = document.getElementById("sound-toggle-btn");
+
   if(soundBtn){
-    soundBtn.onclick = () => Sounds.toggle();
+    soundBtn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      Sounds.toggle();
+
+      if(typeof Notify !== "undefined"){
+        Notify.system(
+          Sounds.enabled
+            ? "Systemsound aktiviert"
+            : "Systemsound deaktiviert"
+        );
+      }
+    });
   }
 }
 
