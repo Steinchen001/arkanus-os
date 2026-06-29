@@ -37,12 +37,18 @@ const Radio = {
   },
 
   mission(text){
-    this.show("NEUE ANWEISUNG", [
-      "Ermittler bestätigt: " + Profile.getName(),
-      "Übertragung empfangen",
-      text
-    ]);
-  },
+  const extra =
+    text.includes("Audioprotokoll") || text.includes("auswerten")
+      ? "Öffnen Sie das Audioprotokoll und hören Sie die Übertragung vollständig an."
+      : "Folgen Sie der aktiven Mission im System.";
+
+  this.show("NEUE ANWEISUNG", [
+    "Ermittler bestätigt: " + Profile.getName(),
+    "Übertragung empfangen",
+    text,
+    extra
+  ]);
+},
 
   denied(){
     this.show("SICHERHEITSALARM", [
