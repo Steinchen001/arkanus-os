@@ -108,6 +108,25 @@ terminal(){
       this.play(1170, 0.10, "sine");
     }, 90);
   },
+  openCase(){
+  this.play(300, 0.08, "triangle");
+
+  setTimeout(() => {
+    this.play(460, 0.08, "triangle");
+  }, 90);
+},
+
+alarm(){
+  this.play(160, 0.10, "sawtooth");
+
+  setTimeout(() => {
+    this.play(120, 0.10, "sawtooth");
+  }, 120);
+
+  setTimeout(() => {
+    this.play(160, 0.10, "sawtooth");
+  }, 240);
+},
     toggle(){
   const saved = localStorage.getItem("arkanus_sound_enabled");
 
