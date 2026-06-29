@@ -96,6 +96,11 @@ const Arkanus = {
     Archive.renderCases();
     Archive.renderDocuments();
     Archive.openFromUrl();
+    setTimeout(() => {
+  if(typeof Radio !== "undefined" && Profile.current){
+    Radio.welcome();
+  }
+}, 900);
 
     if(typeof Sounds !== "undefined"){
   Sounds.loadSetting();
