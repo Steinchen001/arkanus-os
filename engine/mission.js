@@ -50,23 +50,24 @@ const Mission = {
     const newText = this.getStatusText(fall);
 
     if(title.innerText !== newText){
-      hud.classList.remove("flash");
-      void hud.offsetWidth;
-      hud.classList.add("flash");
+  hud.classList.remove("flash");
+  void hud.offsetWidth;
+  hud.classList.add("flash");
 
-      if(typeof Sounds !== "undefined"){
-        Sounds.mission();
-      }
+  if(typeof Sounds !== "undefined"){
+    Sounds.mission();
+  }
 
-      if(typeof Notify !== "undefined"){
-        Notify.mission("Neue Anweisung empfangen");
-        if(typeof Radio !== "undefined"){
-  Radio.mission(newText);
+  if(typeof Notify !== "undefined"){
+    Notify.mission("Neue Anweisung empfangen");
+  }
+
+  if(typeof Radio !== "undefined"){
+    Radio.mission(newText);
+  }
 }
-      }
-    }
 
-    title.innerText = newText;
-    hud.classList.remove("hidden");
+title.innerText = newText;
+hud.classList.remove("hidden");
   }
 };
