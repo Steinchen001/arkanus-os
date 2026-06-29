@@ -218,7 +218,7 @@ const MapSystem = {
       navigator.geolocation.clearWatch(this.watchId);
     }
 
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       (position) => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
