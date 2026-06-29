@@ -183,7 +183,9 @@ if(typeof Notify !== "undefined"){
           Archive.renderCases();
           Archive.renderDocuments();
           Profile.updateBadge();
-
+if(typeof Progress !== "undefined"){
+  Progress.flashBars();
+}
 if(typeof Mission !== "undefined"){
   Mission.updateHud(fall);
 }
@@ -253,7 +255,9 @@ if(typeof Completion !== "undefined"){
   Archive.renderCases();
   Archive.renderDocuments();
   Profile.updateBadge();
-
+if(typeof Progress !== "undefined"){
+  Progress.flashBars();
+}
   if(typeof Mission !== "undefined"){
     Mission.updateHud(fall);
   }
