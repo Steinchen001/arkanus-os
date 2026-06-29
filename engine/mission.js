@@ -18,20 +18,25 @@ const Mission = {
     const status = Storage.getChapterStatus(fall, chapter);
 
     if(status === "location_missing"){
-      return "AKTIVE MISSION: " + chapter.title + " // Standort bestätigen";
+      return "📍 Begib dich zur Station: " + chapter.title;
     }
 
     if(status === "waiting"){
-      return "AKTIVE MISSION: " + chapter.title + " // Wartet auf vorherige Sequenz";
+      return "▶ Audioprotokoll auswerten: " + chapter.title;
     }
 
     if(status === "code_required"){
-      return "AKTIVE MISSION: " + chapter.title + " // Feldcode erforderlich";
+      return "🔑 Feldcode erforderlich: " + chapter.title;
     }
 
-    return "AKTIVE MISSION: " + chapter.title;
+    if(status === "unlocked"){
+      return "✅ Sequenz freigegeben: " + chapter.title;
+    }
+
+    return "🛰 Neue Anweisung wird berechnet";
   },
-    updateHud(fall){
+
+  updateHud(fall){
     const hud = document.getElementById("mission-hud");
     const title = document.getElementById("mission-hud-title");
 
@@ -44,13 +49,21 @@ const Mission = {
 
     const newText = this.getStatusText(fall);
 
-if(title.innerText !== newText){
-  hud.classList.remove("flash");
-  void hud.offsetWidth;
-  hud.classList.add("flash");
-}
+    if(title.innerText !== newText){
+      hud.classList.remove("flash");
+      void hud.offsetWidth;
+      hud.classList.add("flash");
 
-title.innerText = newText;
-hud.classList.remove("hidden");
+      if(typeof Sounds !== "undefined"){
+        Sounds.mission();
+      }
+
+      if(typeof Notify !== "undefined"){
+        Notify.mission("Neue Anweisung empfangen");
+      }
+    }
+
+    title.innerText = newText;
+    hud.classList.remove("hidden");
   }
 };
