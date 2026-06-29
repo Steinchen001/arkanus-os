@@ -107,18 +107,23 @@ terminal(){
     }, 90);
   },
     toggle(){
-    this.enabled = !this.enabled;
-    localStorage.setItem("arkanus_sound_enabled", this.enabled ? "true" : "false");
-    this.updateButton();
-  },
+  this.enabled = !this.enabled;
+  localStorage.setItem("arkanus_sound_enabled", this.enabled ? "true" : "false");
 
-  loadSetting(){
-    const saved = localStorage.getItem("arkanus_sound_enabled");
-    if(saved === "false"){
-      this.enabled = false;
+  if(this.enabled){
+    this.init();
+
+    if(this.ctx && this.ctx.state === "suspended"){
+      this.ctx.resume();
     }
-    this.updateButton();
-  },
+
+    setTimeout(() => {
+      this.success();
+    }, 100);
+  }
+
+  this.updateButton();
+},
 
   updateButton(){
     const btn = document.getElementById("sound-toggle-btn");
