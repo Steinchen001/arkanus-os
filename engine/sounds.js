@@ -91,5 +91,25 @@ const Sounds = {
     setTimeout(() => {
       this.play(1170, 0.10, "sine");
     }, 90);
+  },
+    toggle(){
+    this.enabled = !this.enabled;
+    localStorage.setItem("arkanus_sound_enabled", this.enabled ? "true" : "false");
+    this.updateButton();
+  },
+
+  loadSetting(){
+    const saved = localStorage.getItem("arkanus_sound_enabled");
+    if(saved === "false"){
+      this.enabled = false;
+    }
+    this.updateButton();
+  },
+
+  updateButton(){
+    const btn = document.getElementById("sound-toggle-btn");
+    if(!btn) return;
+
+    btn.innerText = this.enabled ? "🔊 Sound: AN" : "🔇 Sound: AUS";
   }
 };
