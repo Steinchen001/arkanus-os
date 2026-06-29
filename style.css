@@ -1418,3 +1418,51 @@ box-shadow:0 0 8px #00ffd0;
   padding:12px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
+/* ===========================
+   SYSTEM NOTIFY
+=========================== */
+
+#system-toast{
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    width:320px;
+
+    background:#071113;
+
+    border:1px solid var(--cyan);
+
+    border-left:5px solid var(--cyan);
+
+    border-radius:14px;
+
+    padding:16px;
+
+    color:white;
+
+    z-index:999999;
+
+    box-shadow:0 0 28px rgba(0,255,208,.25);
+
+    transform:translateX(420px);
+
+    transition:.35s;
+}
+
+#system-toast.active{
+    transform:translateX(0);
+}
+
+.toast-title{
+    color:var(--gold);
+    font-family:monospace;
+    letter-spacing:2px;
+    margin-bottom:6px;
+}
+
+.toast-text{
+    color:var(--cyan);
+    font-weight:bold;
+}
