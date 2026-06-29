@@ -173,6 +173,9 @@ const Player = {
           Storage.log("Archivschlüssel akzeptiert: " + chapter.title);
 if(typeof Notify !== "undefined"){
   Notify.success("Feldcode akzeptiert: " + chapter.title);
+  if(typeof Sounds !== "undefined"){
+  Sounds.success();
+}
 }
           Decrypt.hide();
 
