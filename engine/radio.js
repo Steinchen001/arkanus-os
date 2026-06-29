@@ -25,9 +25,9 @@ const Radio = {
       Sounds.mission();
     }
 
-    setTimeout(() => {
-      overlay.classList.remove("active");
-    }, 3600);
+    overlay.onclick = () => {
+  overlay.classList.remove("active");
+};
   },
 
   mission(text){
