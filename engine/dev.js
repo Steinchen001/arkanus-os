@@ -106,15 +106,20 @@ const Dev = {
           <h4>Kapitel / Feldcodes</h4>
           <ul class="dev-code-list">
             ${detail.chapters.map(chapter => `
-              <li>
-                <span>${chapter.title}</span>
-                <code>${chapter.code || "FREI"}</code>
-                <button onclick="Dev.unlockChapter('${detail.id}', '${chapter.id}')">🔓</button>
-                <button onclick="Dev.markLocation('${detail.id}', '${chapter.id}')">📍</button>
-                <button onclick="Dev.lockChapter('${detail.id}', '${chapter.id}')">🔒</button>
-                ${chapter.code ? `<button onclick="Dev.copyCode('${chapter.code}')">Kopieren</button>` : ""}
-              </li>
-            `).join("")}
+  <li>
+    <div class="dev-code-main">
+      <span>${chapter.title}</span>
+      <code>${chapter.code || "FREI"}</code>
+    </div>
+
+    <div class="dev-code-actions">
+      <button onclick="Dev.unlockChapter('${detail.id}', '${chapter.id}')">🔓</button>
+      <button onclick="Dev.markLocation('${detail.id}', '${chapter.id}')">📍</button>
+      <button onclick="Dev.lockChapter('${detail.id}', '${chapter.id}')">🔒</button>
+      ${chapter.code ? `<button onclick="Dev.copyCode('${chapter.code}')">📋</button>` : ""}
+    </div>
+  </li>
+`).join("")}
           </ul>
         ` : `
           <p class="dev-warning">Keine case.json geladen.</p>
