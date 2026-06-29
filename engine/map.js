@@ -312,6 +312,14 @@ const MapSystem = {
         `📍 Station erreicht ✔ // ${nearest.requiresCode ? "Schlüssel erforderlich" : "Kein Schlüssel nötig"}`;
 
       Storage.setLocationReached(this.activeFall.id, nearest.id);
+      
+      if(typeof Sounds !== "undefined"){
+  Sounds.gps();
+}
+
+if(typeof Notify !== "undefined"){
+  Notify.gps("Station erreicht: " + nearest.title);
+}
 
 Player.render(this.activeFall);
 Archive.renderDocuments();
