@@ -1486,3 +1486,28 @@ box-shadow:0 0 8px #00ffd0;
 .sound-btn:hover{
     background:rgba(0,255,220,.12);
 }
+/* ===========================
+   MISSION HUD UPDATE EFFECT
+=========================== */
+
+.mission-hud.flash{
+  animation:missionFlash .75s ease;
+}
+
+@keyframes missionFlash{
+  0%{
+    transform:scale(1);
+    box-shadow:0 0 18px rgba(0,255,208,.12);
+  }
+
+  35%{
+    transform:scale(1.015);
+    border-color:var(--gold);
+    box-shadow:0 0 34px rgba(255,176,0,.35);
+  }
+
+  100%{
+    transform:scale(1);
+    box-shadow:0 0 18px rgba(0,255,208,.12);
+  }
+}
