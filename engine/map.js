@@ -319,6 +319,9 @@ const MapSystem = {
 
 if(typeof Notify !== "undefined"){
   Notify.gps("Station erreicht: " + nearest.title);
+  if(typeof Radio !== "undefined"){
+  Radio.gps("Station erreicht: " + nearest.title);
+}
 }
 
 Player.render(this.activeFall);
