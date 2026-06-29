@@ -118,11 +118,13 @@ const Arkanus = {
     }, 500);
 
     document.querySelectorAll("button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if(typeof Sounds !== "undefined"){
-          Sounds.click();
-        }
-      });
-    });
+  btn.addEventListener("click", event => {
+    if(btn.id === "sound-toggle-btn") return;
+
+    if(typeof Sounds !== "undefined"){
+      Sounds.click();
+    }
+  });
+});
   }
 };
