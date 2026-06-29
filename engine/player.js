@@ -171,6 +171,10 @@ const Player = {
           Storage.saveLastFall(fall.id);
           Storage.saveLastChapter(chapter.id);
           Storage.log("Archivschlüssel akzeptiert: " + chapter.title);
+          
+          if(typeof Director !== "undefined"){
+  Director.codeAccepted();
+}
 
           if(typeof Notify !== "undefined"){
             Notify.success("Feldcode akzeptiert: " + chapter.title);
@@ -219,6 +223,10 @@ const Player = {
         }
 
         Storage.log("Ungültiger Archivschlüssel eingegeben.");
+        
+        if(typeof Director !== "undefined"){
+  Director.codeFailed();
+}
       }
     });
   },
