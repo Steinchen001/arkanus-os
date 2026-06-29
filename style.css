@@ -1534,3 +1534,61 @@ box-shadow:0 0 8px #00ffd0;
     background:var(--cyan);
   }
 }
+/* ===========================
+   ARKANUS ZENTRALE
+=========================== */
+
+#radio-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999998;
+  padding:18px;
+}
+
+#radio-overlay.active{
+  display:flex;
+}
+
+.radio-box{
+  width:100%;
+  max-width:520px;
+  background:#050707;
+  border:1px solid var(--cyan);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 0 34px rgba(0,255,208,.32);
+  font-family:monospace;
+  animation:radioIn .25s ease;
+}
+
+.radio-title{
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.radio-box h2{
+  color:var(--cyan);
+  letter-spacing:2px;
+}
+
+.radio-lines p{
+  color:#b8fff3;
+  margin:8px 0;
+}
+
+@keyframes radioIn{
+  from{
+    transform:scale(.96);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
