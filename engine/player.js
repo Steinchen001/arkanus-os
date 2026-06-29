@@ -227,6 +227,11 @@ if(typeof Completion !== "undefined"){
   this.unlockInteractionTargets(fall, chapter);
 }, { once: true });
   },
+  Storage.markAudioStarted(fall.id, chapter.id);
+
+if(typeof Mission !== "undefined"){
+  Mission.updateHud(fall);
+}
 
   unlockInteractionTargets(fall, sourceChapter){
     const targets = fall.chapters.filter(chapter =>
