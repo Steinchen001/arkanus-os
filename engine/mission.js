@@ -1,4 +1,6 @@
 const Mission = {
+  lastRadioText: null,
+
   getActiveChapter(fall){
     if(!fall || !fall.chapters) return null;
 
@@ -72,7 +74,8 @@ const Mission = {
         Notify.mission("Neue Anweisung empfangen");
       }
 
-      if(typeof Radio !== "undefined"){
+      if(typeof Radio !== "undefined" && this.lastRadioText !== newText){
+        this.lastRadioText = newText;
         Radio.mission(newText);
       }
     }
