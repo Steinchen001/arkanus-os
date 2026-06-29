@@ -90,6 +90,14 @@ const Arkanus = {
     Archive.renderCases();
     Archive.renderDocuments();
     Archive.openFromUrl();
+    if(typeof Sounds !== "undefined"){
+  Sounds.loadSetting();
+
+  const soundBtn = document.getElementById("sound-toggle-btn");
+  if(soundBtn){
+    soundBtn.onclick = () => Sounds.toggle();
+  }
+}
 
     setTimeout(() => {
       Profile.updateBadge();
