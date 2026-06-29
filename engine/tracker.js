@@ -1,39 +1,32 @@
 const Tracker = {
   lastStage: null,
-  scannerActive: false,
 
-  update(distance){
-    if(typeof Radio === "undefined") return;
-
+  update(distance, targetTitle = "Unbekannte Station"){
     distance = Math.round(distance);
 
     const stage = this.getStage(distance);
+    const bars = "█".repeat(stage) + "░".repeat(10 - stage);
+
+    this.updateScannerPanel(distance, targetTitle, stage, bars);
 
     if(stage === this.lastStage) return;
-
     this.lastStage = stage;
 
-    const lines = this.getLines(distance, stage);
-
-    const overlay = document.getElementById("radio-overlay");
-    const isOpen = overlay && overlay.classList.contains("active");
-
-    if(isOpen && this.scannerActive){
-      overlay.querySelector("h2").innerText = "SIGNALSCAN";
-      overlay.querySelector(".radio-lines").innerHTML =
-        lines.map(line => `<p>&gt; ${line}</p>`).join("");
-      return;
+    if(typeof Radio !== "undefined"){
+      Radio.show("SIGNALSCAN", this.getLines(distance, stage, bars));
     }
+  },
 
-    this.scannerActive = true;
+  updateScannerPanel(distance, targetTitle, stage, bars){
+    const barEl = document.getElementById("scanner-bars");
+    const distanceEl = document.getElementById("scanner-distance");
+    const statusEl = document.getElementById("scanner-status");
 
-    Radio.show("SIGNALSCAN", lines);
+    if(!barEl || !distanceEl || !statusEl) return;
 
-    if(overlay){
-      overlay.addEventListener("click", () => {
-        this.scannerActive = false;
-      }, { once:true });
-    }
+    barEl.innerText = bars;
+    distanceEl.innerText = distance <= 8 ? "POSITION ERREICHT" : distance + " m";
+    statusEl.innerText = "Ziel: " + targetTitle + " // Signalstufe " + stage + "/10";
   },
 
   getStage(distance){
@@ -49,51 +42,23 @@ const Tracker = {
     return 1;
   },
 
-  getLines(distance, stage){
-    const bars = "█".repeat(stage) + "░".repeat(10 - stage);
-
+  getLines(distance, stage, bars){
     if(stage === 10){
-      return [
-        bars,
-        "",
-        "Signal bestätigt.",
-        "Position erreicht.",
-        "Ermittlung kann fortgesetzt werden."
-      ];
+      return [bars, "", "Signal bestätigt.", "Position erreicht."];
     }
 
     if(stage >= 8){
-      return [
-        bars,
-        "",
-        "Fast am Ziel.",
-        "Entfernung: " + distance + " Meter"
-      ];
+      return [bars, "", "Fast am Ziel.", "Entfernung: " + distance + " Meter"];
     }
 
     if(stage >= 6){
-      return [
-        bars,
-        "",
-        "Signal sehr stabil.",
-        "Entfernung: " + distance + " Meter"
-      ];
+      return [bars, "", "Signal sehr stabil.", "Entfernung: " + distance + " Meter"];
     }
 
     if(stage >= 4){
-      return [
-        bars,
-        "",
-        "Signal verbessert.",
-        "Entfernung: " + distance + " Meter"
-      ];
+      return [bars, "", "Signal verbessert.", "Entfernung: " + distance + " Meter"];
     }
 
-    return [
-      bars,
-      "",
-      "Signal schwach.",
-      "Entfernung: " + distance + " Meter"
-    ];
+    return [bars, "", "Signal schwach.", "Entfernung: " + distance + " Meter"];
   }
 };
