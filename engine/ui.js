@@ -3,6 +3,7 @@ const UI = {
     cases: "ARCHIV",
     audio: "AUDIOPROTOKOLLE",
     map: "ERMITTLERKARTE",
+    scanner: "SIGNAL-SCANNER",
     documents: "ERMITTLERAKTE",
     classified: "KLASSIFIZIERT"
   },
