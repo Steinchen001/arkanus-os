@@ -171,43 +171,53 @@ const Player = {
           Storage.saveLastFall(fall.id);
           Storage.saveLastChapter(chapter.id);
           Storage.log("Archivschlüssel akzeptiert: " + chapter.title);
-if(typeof Notify !== "undefined"){
-  Notify.success("Feldcode akzeptiert: " + chapter.title);
-  if(typeof Radio !== "undefined"){
-  Radio.chapter(chapter);
-}
-  if(typeof Sounds !== "undefined"){
-  Sounds.success();
-}
-}
+
+          if(typeof Notify !== "undefined"){
+            Notify.success("Feldcode akzeptiert: " + chapter.title);
+          }
+
+          if(typeof Radio !== "undefined"){
+            Radio.chapter(chapter);
+          }
+
+          if(typeof Sounds !== "undefined"){
+            Sounds.success();
+          }
+
           Decrypt.hide();
 
           this.render(fall);
           Archive.renderCases();
           Archive.renderDocuments();
           Profile.updateBadge();
-if(typeof Progress !== "undefined"){
-  Progress.flashBars();
-}
-if(typeof Mission !== "undefined"){
-  Mission.updateHud(fall);
-}
 
-if(typeof Completion !== "undefined"){
-  Completion.show(fall);
-}
+          if(typeof Progress !== "undefined"){
+            Progress.flashBars();
+          }
+
+          if(typeof Mission !== "undefined"){
+            Mission.updateHud(fall);
+          }
+
+          if(typeof Completion !== "undefined"){
+            Completion.show(fall);
+          }
         }, 2400);
       }else{
         message.innerText = "Zugriff verweigert. Feldcode prüfen.";
+
         if(typeof Notify !== "undefined"){
-  Notify.error("Zugriff verweigert. Feldcode prüfen.");
-  if(typeof Radio !== "undefined"){
-  Radio.denied();
-}
-  if(typeof Sounds !== "undefined"){
-  Sounds.error();
-}
-}
+          Notify.error("Zugriff verweigert. Feldcode prüfen.");
+        }
+
+        if(typeof Radio !== "undefined"){
+          Radio.denied();
+        }
+
+        if(typeof Sounds !== "undefined"){
+          Sounds.error();
+        }
+
         Storage.log("Ungültiger Archivschlüssel eingegeben.");
       }
     });
@@ -218,20 +228,15 @@ if(typeof Completion !== "undefined"){
     if(!audio) return;
 
     audio.addEventListener("play", () => {
-  Storage.markAudioStarted(fall.id, chapter.id);
+      Storage.markAudioStarted(fall.id, chapter.id);
 
-  if(typeof Mission !== "undefined"){
-    Mission.updateHud(fall);
-  }
+      if(typeof Mission !== "undefined"){
+        Mission.updateHud(fall);
+      }
 
-  this.unlockInteractionTargets(fall, chapter);
-}, { once: true });
+      this.unlockInteractionTargets(fall, chapter);
+    }, { once: true });
   },
-  Storage.markAudioStarted(fall.id, chapter.id);
-
-if(typeof Mission !== "undefined"){
-  Mission.updateHud(fall);
-}
 
   unlockInteractionTargets(fall, sourceChapter){
     const targets = fall.chapters.filter(chapter =>
@@ -246,12 +251,15 @@ if(typeof Mission !== "undefined"){
       if(!Storage.isUnlocked(fall.id, target.id)){
         Storage.unlock(fall.id, target.id);
         Storage.log("Automatisch freigegeben: " + target.title);
+
         if(typeof Notify !== "undefined"){
-  Notify.audio("Neue Sequenz freigegeben: " + target.title);
-  if(typeof Sounds !== "undefined"){
-  Sounds.unlock();
-}
-}
+          Notify.audio("Neue Sequenz freigegeben: " + target.title);
+        }
+
+        if(typeof Sounds !== "undefined"){
+          Sounds.unlock();
+        }
+
         unlockedSomething = true;
       }
     });
@@ -260,25 +268,27 @@ if(typeof Mission !== "undefined"){
       const names = targets.map(t => t.title).join(", ");
 
       Feedback.notify("ARKANUS SYSTEM", [
-  "Audioprotokoll vollständig ausgewertet",
-  "Verknüpfte Daten gefunden",
-  "Rätselmodul entschlüsselt",
-  "Neue Ermittlungssequenz verfügbar",
-  "Freigegeben: " + names
-]);
+        "Audioprotokoll vollständig ausgewertet",
+        "Verknüpfte Daten gefunden",
+        "Rätselmodul entschlüsselt",
+        "Neue Ermittlungssequenz verfügbar",
+        "Freigegeben: " + names
+      ]);
 
       setTimeout(() => {
-  this.render(fall);
-  Archive.renderCases();
-  Archive.renderDocuments();
-  Profile.updateBadge();
-if(typeof Progress !== "undefined"){
-  Progress.flashBars();
-}
-  if(typeof Mission !== "undefined"){
-    Mission.updateHud(fall);
-  }
-}, 2300);
+        this.render(fall);
+        Archive.renderCases();
+        Archive.renderDocuments();
+        Profile.updateBadge();
+
+        if(typeof Progress !== "undefined"){
+          Progress.flashBars();
+        }
+
+        if(typeof Mission !== "undefined"){
+          Mission.updateHud(fall);
+        }
+      }, 2300);
     }
   },
 
@@ -293,6 +303,12 @@ if(typeof Progress !== "undefined"){
         box.classList.add("hidden");
         transcriptBtn.innerText = "📄 Transkript anzeigen";
         return;
+      }
+
+      Storage.markAudioStarted(fall.id, chapter.id);
+
+      if(typeof Mission !== "undefined"){
+        Mission.updateHud(fall);
       }
 
       this.unlockInteractionTargets(fall, chapter);
@@ -324,13 +340,14 @@ if(typeof Progress !== "undefined"){
           box.dataset.loaded = "true";
           Storage.markRead(fall.id, chapter.id);
           Storage.log("Transkript geöffnet: " + chapter.title);
-          if(typeof Sounds !== "undefined"){
-  Sounds.mission();
-}
 
-if(typeof Notify !== "undefined"){
-  Notify.system("Transkript geöffnet: " + chapter.title);
-}
+          if(typeof Sounds !== "undefined"){
+            Sounds.mission();
+          }
+
+          if(typeof Notify !== "undefined"){
+            Notify.system("Transkript geöffnet: " + chapter.title);
+          }
 
           Archive.renderDocuments();
         }, 900);
