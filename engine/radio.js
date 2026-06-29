@@ -10,6 +10,7 @@ const Radio = {
           <div class="radio-title">ARKANUS ZENTRALE</div>
           <h2></h2>
           <div class="radio-lines"></div>
+<div class="radio-hint">BERÜHREN ZUM BESTÄTIGEN</div>
         </div>
       `;
       document.body.appendChild(overlay);
