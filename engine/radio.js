@@ -21,7 +21,9 @@ const Radio = {
       lines.map(line => `<p>&gt; ${line}</p>`).join("");
 
     overlay.classList.add("active");
-
+overlay.onclick = () => {
+  overlay.classList.remove("active");
+};
     if(typeof Sounds !== "undefined"){
       Sounds.mission();
     }
