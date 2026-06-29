@@ -86,6 +86,13 @@ const Archive = {
   },
 
   async loadFall(indexItem){
+    if(typeof Sounds !== "undefined"){
+  Sounds.openCase();
+}
+
+if(typeof Notify !== "undefined"){
+  Notify.system("Akte wird geladen: " + indexItem.title);
+}
     Decrypt.show("Akte wird geladen", [
       "Archivpfad: " + indexItem.folder,
       "Archiv-ID: " + (indexItem.gcCode || "unbekannt"),
