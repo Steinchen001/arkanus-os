@@ -303,6 +303,13 @@ if(typeof Completion !== "undefined"){
           box.dataset.loaded = "true";
           Storage.markRead(fall.id, chapter.id);
           Storage.log("Transkript geöffnet: " + chapter.title);
+          if(typeof Sounds !== "undefined"){
+  Sounds.mission();
+}
+
+if(typeof Notify !== "undefined"){
+  Notify.system("Transkript geöffnet: " + chapter.title);
+}
 
           Archive.renderDocuments();
         }, 900);
