@@ -1,6 +1,6 @@
 const Director = {
   idleTimer: null,
-  idleDelay: 45000,
+  idleDelay: 60000,
   falseCodeCount: 0,
 
   init(){
@@ -34,7 +34,9 @@ const Director = {
       ["Das Signal wird schwächer.", "Bleiben Sie in Verbindung."],
       ["Das Archiv wartet", "auf Ihre nächste Entscheidung."],
       ["Professor Arkanus", "wartete ebenfalls nicht."],
-      ["Die Verbindung", "bleibt nicht ewig bestehen."]
+      ["Die Verbindung", "bleibt nicht ewig bestehen."],
+      ["Keine Bewegung erkannt.", "Bitte setzen Sie die Ermittlung fort."],
+      ["Die Spur bleibt aktiv.", "Noch."]
     ];
 
     const msg = messages[Math.floor(Math.random() * messages.length)];
@@ -71,7 +73,6 @@ const Director = {
 
     if(hour >= 22 || hour <= 4){
       const already = Storage.get("director_night_message");
-
       const today = new Date().toISOString().slice(0,10);
 
       if(already === today) return;
@@ -93,6 +94,14 @@ const Director = {
   codeFailed(){
     this.falseCodeCount++;
 
+    if(this.falseCodeCount === 3 && typeof Radio !== "undefined"){
+      Radio.show("HINWEIS", [
+        "Archivschlüssel weiterhin ungültig.",
+        "Prüfen Sie Schreibweise und Reihenfolge.",
+        "Keine Leerzeichen erforderlich."
+      ]);
+    }
+
     if(this.falseCodeCount === 5 && typeof Radio !== "undefined"){
       Radio.show("SICHERHEITSWARNUNG", [
         "Ermittler...",
@@ -100,9 +109,25 @@ const Director = {
         "Oder?"
       ]);
     }
+
+    if(this.falseCodeCount === 8 && typeof Radio !== "undefined"){
+      Radio.show("SYSTEMSPERRE VORBEREITET", [
+        "Mehrere Fehlversuche registriert.",
+        "Keine Sorge.",
+        "Noch ist das System gnädig."
+      ]);
+    }
   },
 
   codeAccepted(){
+    if(this.falseCodeCount >= 3 && typeof Radio !== "undefined"){
+      Radio.show("ZUGRIFF WIEDERHERGESTELLT", [
+        "Hartnäckigkeit zahlt sich aus.",
+        "Archivschlüssel akzeptiert.",
+        "Ermittlung wird fortgesetzt."
+      ]);
+    }
+
     this.falseCodeCount = 0;
   }
 };
