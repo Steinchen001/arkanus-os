@@ -23,5 +23,12 @@ const Progress = {
       total,
       percent
     };
+  },
+    flashBars(){
+    document.querySelectorAll(".progress-bar").forEach(bar => {
+      bar.classList.remove("flash");
+      void bar.offsetWidth;
+      bar.classList.add("flash");
+    });
   }
 };
