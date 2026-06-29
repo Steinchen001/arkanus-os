@@ -302,6 +302,10 @@ const MapSystem = {
     });
 
     if(!nearest) return;
+    
+if(typeof Tracker !== "undefined"){
+  Tracker.update(nearestDistance);
+}
 
     const distanceText = nearestDistance >= 1000
       ? (nearestDistance / 1000).toFixed(2) + " km"
