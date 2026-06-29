@@ -1466,3 +1466,18 @@ box-shadow:0 0 8px #00ffd0;
     color:var(--cyan);
     font-weight:bold;
 }
+/* ===========================
+   SOUND TOGGLE
+=========================== */
+
+#sound-toggle-btn{
+  border-color:rgba(255,176,0,.35);
+  color:var(--gold);
+  font-family:monospace;
+}
+
+#sound-toggle-btn:hover{
+  border-color:var(--gold);
+  background:rgba(255,176,0,.08);
+  color:var(--gold);
+}
