@@ -98,27 +98,22 @@ const Arkanus = {
     Archive.openFromUrl();
 
     if(typeof Sounds !== "undefined"){
-      Sounds.loadSetting();
+  Sounds.loadSetting();
 
-      const soundBtn = document.getElementById("sound-toggle-btn");
+  let soundBtn = document.getElementById("sound-toggle-btn");
 
-      if(soundBtn){
-        soundBtn.addEventListener("click", event => {
-          event.preventDefault();
-          event.stopPropagation();
+  if(soundBtn){
+    const freshBtn = soundBtn.cloneNode(true);
+    soundBtn.parentNode.replaceChild(freshBtn, soundBtn);
 
-          Sounds.toggle();
+    freshBtn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
 
-          if(typeof Notify !== "undefined"){
-            Notify.system(
-              Sounds.enabled
-                ? "Systemsound aktiviert"
-                : "Systemsound deaktiviert"
-            );
-          }
-        });
-      }
-    }
+      Sounds.toggle();
+    });
+  }
+}
 
     setTimeout(() => {
       Profile.updateBadge();
