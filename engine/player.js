@@ -218,8 +218,14 @@ if(typeof Completion !== "undefined"){
     if(!audio) return;
 
     audio.addEventListener("play", () => {
-      this.unlockInteractionTargets(fall, chapter);
-    }, { once: true });
+  Storage.markAudioStarted(fall.id, chapter.id);
+
+  if(typeof Mission !== "undefined"){
+    Mission.updateHud(fall);
+  }
+
+  this.unlockInteractionTargets(fall, chapter);
+}, { once: true });
   },
 
   unlockInteractionTargets(fall, sourceChapter){
