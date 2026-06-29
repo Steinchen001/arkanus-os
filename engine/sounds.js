@@ -60,7 +60,7 @@ boot(){
 
 terminal(){
   this.play(430, 0.018, "square");
-}
+},
   success(){
     this.play(740, 0.08, "sine");
 
