@@ -60,6 +60,9 @@ const Mission = {
 
       if(typeof Notify !== "undefined"){
         Notify.mission("Neue Anweisung empfangen");
+        if(typeof Radio !== "undefined"){
+  Radio.mission(newText);
+}
       }
     }
 
