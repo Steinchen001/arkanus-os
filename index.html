@@ -66,6 +66,9 @@
                 <button class="nav-btn" data-view="map">
                     🗺 Ermittlerkarte
                 </button>
+                <button class="nav-btn" data-view="scanner">
+                    📡 Signal-Scanner
+                </button>
 
                 <button class="nav-btn" data-view="documents">
                     📜 Ermittlerakte
@@ -115,6 +118,35 @@
 
                     <!-- Ermittlerkarte -->
                     <section id="map" class="view">
+                        <section id="scanner" class="view">
+
+    <div id="scanner-panel">
+
+        <article class="document-card">
+
+            <span class="badge active">
+                LIVE-SIGNAL
+            </span>
+
+            <h2>Signal-Scanner</h2>
+
+            <div id="scanner-bars">
+                ░░░░░░░░░░
+            </div>
+
+            <div id="scanner-distance">
+                ---
+            </div>
+
+            <div id="scanner-status">
+                Kein Ziel aktiv.
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
 
                         <div id="map-container">
                             <article class="document-card">
