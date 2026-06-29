@@ -109,8 +109,16 @@ terminal(){
     }, 90);
   },
     toggle(){
-  this.enabled = !this.enabled;
-  localStorage.setItem("arkanus_sound_enabled", this.enabled ? "true" : "false");
+  const saved = localStorage.getItem("arkanus_sound_enabled");
+
+  this.enabled = saved === "false";
+
+  localStorage.setItem(
+    "arkanus_sound_enabled",
+    this.enabled ? "true" : "false"
+  );
+
+  this.updateButton();
 
   if(this.enabled){
     this.init();
@@ -121,10 +129,16 @@ terminal(){
 
     setTimeout(() => {
       this.success();
-    }, 100);
+    }, 120);
   }
 
-  this.updateButton();
+  if(typeof Notify !== "undefined"){
+    Notify.system(
+      this.enabled
+        ? "Systemsound aktiviert"
+        : "Systemsound deaktiviert"
+    );
+  }
 },
 
   updateButton(){
