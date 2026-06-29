@@ -6,6 +6,11 @@ const Mission = {
 
     return fall.chapters.find(chapter => {
       const status = Storage.getChapterStatus(fall, chapter);
+
+      if(status === "unlocked" && chapter.audio){
+        return !Storage.isAudioStarted(fall.id, chapter.id);
+      }
+
       return status !== "unlocked";
     }) || fall.chapters[fall.chapters.length - 1];
   },
@@ -26,7 +31,7 @@ const Mission = {
         return "🎧 Audioprotokoll anhören: " + chapter.title;
       }
 
-      if(chapter.location){
+      if(chapter.location || chapter.map){
         return "📍 Begib dich zur Station: " + chapter.title;
       }
 
