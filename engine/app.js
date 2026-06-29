@@ -2,11 +2,19 @@ const Arkanus = {
   bootScreen: null,
   app: null,
   bootText: null,
+  bootStarted: false,
 
   async init(){
+    if(this.bootStarted) return;
+    this.bootStarted = true;
+
     this.bootScreen = document.getElementById("boot-screen");
     this.app = document.getElementById("app");
     this.bootText = document.getElementById("boot-text");
+
+    if(this.bootText){
+      this.bootText.innerHTML = "";
+    }
 
     await Loader.init();
 
@@ -52,9 +60,7 @@ const Arkanus = {
           this.app.classList.remove("hidden");
 
           if(!Profile.current){
-            Profile.showSetup(() => {
-              this.afterBoot();
-            });
+            Profile.showSetup(() => this.afterBoot());
             return;
           }
 
@@ -66,11 +72,7 @@ const Arkanus = {
 
       if(char < lines[line].length){
         this.bootText.innerHTML += lines[line].charAt(char);
-
-this.bootText.innerHTML += lines[line].charAt(char);
-char++;
-
-char++;
+        char++;
         setTimeout(typeLine, 20);
       }else{
         this.bootText.innerHTML += "<br>";
@@ -79,9 +81,7 @@ char++;
         setTimeout(typeLine, 150);
       }
     };
-if(typeof Sounds !== "undefined"){
-  Sounds.boot();
-}
+
     typeLine();
   },
 
@@ -96,41 +96,42 @@ if(typeof Sounds !== "undefined"){
     Archive.renderCases();
     Archive.renderDocuments();
     Archive.openFromUrl();
+
     if(typeof Sounds !== "undefined"){
-  Sounds.loadSetting();
+      Sounds.loadSetting();
 
-  const soundBtn = document.getElementById("sound-toggle-btn");
+      const soundBtn = document.getElementById("sound-toggle-btn");
 
-  if(soundBtn){
-    soundBtn.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
+      if(soundBtn){
+        soundBtn.addEventListener("click", event => {
+          event.preventDefault();
+          event.stopPropagation();
 
-      Sounds.toggle();
+          Sounds.toggle();
 
-      if(typeof Notify !== "undefined"){
-        Notify.system(
-          Sounds.enabled
-            ? "Systemsound aktiviert"
-            : "Systemsound deaktiviert"
-        );
+          if(typeof Notify !== "undefined"){
+            Notify.system(
+              Sounds.enabled
+                ? "Systemsound aktiviert"
+                : "Systemsound deaktiviert"
+            );
+          }
+        });
       }
-    });
-  }
-}
+    }
 
     setTimeout(() => {
       Profile.updateBadge();
     }, 500);
 
     document.querySelectorAll("button").forEach(btn => {
-  btn.addEventListener("click", event => {
-    if(btn.id === "sound-toggle-btn") return;
+      btn.addEventListener("click", () => {
+        if(btn.id === "sound-toggle-btn") return;
 
-    if(typeof Sounds !== "undefined"){
-      Sounds.click();
-    }
-  });
-});
+        if(typeof Sounds !== "undefined"){
+          Sounds.click();
+        }
+      });
+    });
   }
 };
