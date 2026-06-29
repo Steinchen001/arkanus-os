@@ -236,6 +236,10 @@ const Player = {
     if(!audio) return;
 
     audio.addEventListener("play", () => {
+  if(typeof AudioServer !== "undefined" && !audio.dataset.serverReady){
+    AudioServer.intercept(audio, fall, chapter, () => {
+      audio.dataset.serverReady = "true";
+
       Storage.markAudioStarted(fall.id, chapter.id);
 
       if(typeof Mission !== "undefined"){
@@ -243,7 +247,19 @@ const Player = {
       }
 
       this.unlockInteractionTargets(fall, chapter);
-    }, { once: true });
+    });
+
+    return;
+  }
+
+  Storage.markAudioStarted(fall.id, chapter.id);
+
+  if(typeof Mission !== "undefined"){
+    Mission.updateHud(fall);
+  }
+
+  this.unlockInteractionTargets(fall, chapter);
+}, { once: true });
   },
 
   unlockInteractionTargets(fall, sourceChapter){
