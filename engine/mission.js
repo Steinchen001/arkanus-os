@@ -4,15 +4,19 @@ const Mission = {
   getActiveChapter(fall){
     if(!fall || !fall.chapters) return null;
 
-    return fall.chapters.find(chapter => {
+    for(const chapter of fall.chapters){
       const status = Storage.getChapterStatus(fall, chapter);
 
-      if(status === "unlocked" && chapter.audio){
-        return !Storage.isAudioStarted(fall.id, chapter.id);
+      if(status === "unlocked" && chapter.audio && !Storage.isAudioStarted(fall.id, chapter.id)){
+        return chapter;
       }
 
-      return status !== "unlocked";
-    }) || fall.chapters[fall.chapters.length - 1];
+      if(status !== "unlocked"){
+        return chapter;
+      }
+    }
+
+    return fall.chapters[fall.chapters.length - 1];
   },
 
   getStatusText(fall){
@@ -23,19 +27,10 @@ const Mission = {
     }
 
     const status = Storage.getChapterStatus(fall, chapter);
+    const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
 
-    if(status === "unlocked"){
-      const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
-
-      if(chapter.audio && !audioStarted){
-        return "🎧 Audioprotokoll anhören: " + chapter.title;
-      }
-
-      if(chapter.location || chapter.map){
-        return "📍 Begib dich zur Station: " + chapter.title;
-      }
-
-      return "✅ Sequenz freigegeben: " + chapter.title;
+    if(chapter.audio && !audioStarted && status === "unlocked"){
+      return "🎧 Audioprotokoll anhören: " + chapter.title;
     }
 
     if(status === "location_missing"){
@@ -48,6 +43,10 @@ const Mission = {
 
     if(status === "code_required"){
       return "🔑 Feldcode erforderlich: " + chapter.title;
+    }
+
+    if(status === "unlocked"){
+      return "✅ Sequenz freigegeben: " + chapter.title;
     }
 
     return "🛰 Neue Anweisung wird berechnet";
