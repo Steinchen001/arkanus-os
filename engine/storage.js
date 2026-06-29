@@ -51,6 +51,13 @@ const Storage = {
   markRead(fallId, chapterId){
     localStorage.setItem(this.key(fallId, chapterId, "read"), "true");
   },
+  markAudioStarted(fallId, chapterId){
+  localStorage.setItem(this.key(fallId, chapterId, "audio_started"), "true");
+},
+
+isAudioStarted(fallId, chapterId){
+  return localStorage.getItem(this.key(fallId, chapterId, "audio_started")) === "true";
+},
 
   isRead(fallId, chapterId){
     return localStorage.getItem(this.key(fallId, chapterId, "read")) === "true";
