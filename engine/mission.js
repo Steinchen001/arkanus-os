@@ -16,22 +16,21 @@ const Mission = {
     }
 
     const status = Storage.getChapterStatus(fall, chapter);
-    const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
 
-if(status === "unlocked" && chapter.audio && !audioStarted){
-  return "🎧 Audioprotokoll anhören: " + chapter.title;
-}
-if(status === "unlocked"){
-  const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
+    if(status === "unlocked"){
+      const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
 
-  if(chapter.audio && !audioStarted){
-    return "🎧 Audioprotokoll anhören: " + chapter.title;
-  }
+      if(chapter.audio && !audioStarted){
+        return "🎧 Audioprotokoll anhören: " + chapter.title;
+      }
 
-  if(chapter.location){
-    return "📍 Begib dich zur Station: " + chapter.title;
-  }
-}
+      if(chapter.location){
+        return "📍 Begib dich zur Station: " + chapter.title;
+      }
+
+      return "✅ Sequenz freigegeben: " + chapter.title;
+    }
+
     if(status === "location_missing"){
       return "📍 Begib dich zur Station: " + chapter.title;
     }
@@ -42,10 +41,6 @@ if(status === "unlocked"){
 
     if(status === "code_required"){
       return "🔑 Feldcode erforderlich: " + chapter.title;
-    }
-
-    if(status === "unlocked"){
-      return "✅ Sequenz freigegeben: " + chapter.title;
     }
 
     return "🛰 Neue Anweisung wird berechnet";
@@ -65,24 +60,24 @@ if(status === "unlocked"){
     const newText = this.getStatusText(fall);
 
     if(title.innerText !== newText){
-  hud.classList.remove("flash");
-  void hud.offsetWidth;
-  hud.classList.add("flash");
+      hud.classList.remove("flash");
+      void hud.offsetWidth;
+      hud.classList.add("flash");
 
-  if(typeof Sounds !== "undefined"){
-    Sounds.mission();
-  }
+      if(typeof Sounds !== "undefined"){
+        Sounds.mission();
+      }
 
-  if(typeof Notify !== "undefined"){
-    Notify.mission("Neue Anweisung empfangen");
-  }
+      if(typeof Notify !== "undefined"){
+        Notify.mission("Neue Anweisung empfangen");
+      }
 
-  if(typeof Radio !== "undefined"){
-    Radio.mission(newText);
-  }
-}
+      if(typeof Radio !== "undefined"){
+        Radio.mission(newText);
+      }
+    }
 
-title.innerText = newText;
-hud.classList.remove("hidden");
+    title.innerText = newText;
+    hud.classList.remove("hidden");
   }
 };
