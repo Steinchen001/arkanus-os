@@ -1470,14 +1470,19 @@ box-shadow:0 0 8px #00ffd0;
    SOUND TOGGLE
 =========================== */
 
-#sound-toggle-btn{
-  border-color:rgba(255,176,0,.35);
-  color:var(--gold);
-  font-family:monospace;
+.sound-btn{
+    width:100%;
+    padding:13px;
+    border-radius:12px;
+    border:1px solid rgba(0,255,220,.45);
+    background:rgba(0,255,220,.05);
+    color:#00ffe0;
+    font-family:monospace;
+    font-size:15px;
+    cursor:pointer;
+    transition:.2s;
 }
 
-#sound-toggle-btn:hover{
-  border-color:var(--gold);
-  background:rgba(255,176,0,.08);
-  color:var(--gold);
+.sound-btn:hover{
+    background:rgba(0,255,220,.12);
 }
