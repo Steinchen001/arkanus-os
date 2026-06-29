@@ -19,7 +19,9 @@ const Sounds = {
     }
 
     if(!this.ctx) return;
-
+if(this.ctx.state === "suspended"){
+  this.ctx.resume();
+}
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
 
