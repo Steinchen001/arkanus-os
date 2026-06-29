@@ -21,7 +21,17 @@ const Mission = {
 if(status === "unlocked" && chapter.audio && !audioStarted){
   return "🎧 Audioprotokoll anhören: " + chapter.title;
 }
+if(status === "unlocked"){
+  const audioStarted = Storage.isAudioStarted(fall.id, chapter.id);
 
+  if(chapter.audio && !audioStarted){
+    return "🎧 Audioprotokoll anhören: " + chapter.title;
+  }
+
+  if(chapter.location){
+    return "📍 Begib dich zur Station: " + chapter.title;
+  }
+}
     if(status === "location_missing"){
       return "📍 Begib dich zur Station: " + chapter.title;
     }
