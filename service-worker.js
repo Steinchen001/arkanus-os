@@ -22,6 +22,7 @@ const FILES_TO_CACHE = [
   "/engine/stats.js",
   "/engine/decrypt.js",
   "/engine/feedback.js",
+  "/engine/notify.js",
   "/engine/logbook.js",
   "/engine/map.js",
   "/engine/progress.js",
